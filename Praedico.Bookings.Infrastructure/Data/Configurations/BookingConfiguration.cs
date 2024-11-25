@@ -31,12 +31,12 @@ internal class BookingConfiguration : IEntityTypeConfiguration<Booking>
 
         builder.HasOne(x => x.Contact)
             .WithMany() // No navigation from Contact back to Booking.
-            .HasForeignKey("ContactId")
+            //.HasForeignKey("ContactId")
             .IsRequired(); // Ensures Contact is required.
 
         builder.HasOne(x => x.Car)
             .WithMany() // No navigation from Car back to Booking.
-            .HasForeignKey("ContactId")
+            //.HasForeignKey("CarId")
             .IsRequired(); // Ensures Car is required.
         
         Log.Debug($"{nameof(BookingConfiguration)}:{nameof(IEntityTypeConfiguration<Booking>)} Completed.");

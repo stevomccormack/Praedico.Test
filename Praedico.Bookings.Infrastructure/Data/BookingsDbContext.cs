@@ -26,9 +26,6 @@ namespace Praedico.Bookings.Infrastructure.Data
             
             //Value Converters
             modelBuilder.ApplyValueConverters();
-
-            // Seed Data
-            modelBuilder.SeedAll();
         }
     }
 }

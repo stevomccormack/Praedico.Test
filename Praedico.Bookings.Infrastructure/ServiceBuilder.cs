@@ -37,6 +37,14 @@ public static class ServiceBuilder
         });
 
         services.AddSingleton<IObserver<DiagnosticListener>, DiagnosticsObserver>();
+
+        // create schema
+        using var serviceProvider = services.BuildServiceProvider();
+        using var dbContext = serviceProvider.GetRequiredService<BookingsDbContext>();
+        dbContext.Database.EnsureCreated(); // This ensures the database and schema exist
+        
+        //seed data
+        dbContext.SeedAll();
     }
 
     private static string GetOrCreateDbPath()

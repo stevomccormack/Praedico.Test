@@ -9,91 +9,75 @@ namespace Praedico.Bookings.Infrastructure.Data
 {
     public static class DataSeeder
     {
-        
-        public static void SeedAll(this ModelBuilder modelBuilder)
+        public static void SeedAll(this BookingsDbContext dbContext)
         {
             Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedAll)} Started...");
             
-            SeedCars(modelBuilder);
-            SeedContacts(modelBuilder);
-            SeedBookings(modelBuilder);
-            SeedSchedule(modelBuilder);
+            SeedCars(dbContext);
+            SeedContacts(dbContext);
+            SeedSchedules(dbContext);
+            SeedBookings(dbContext);
             
             Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedAll)} Completed.");
         }
 
-        private static void SeedCars(this ModelBuilder modelBuilder)
+        private static void SeedCars(this BookingsDbContext dbContext)
         {
             Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedCars)} Started...");
-            
-            SeedData.SeedCars();
-            modelBuilder.Entity<Car>().HasData(SeedData.Cars.Select(x => new
+
+            if (!dbContext.Cars.Any())
             {
-                x.Id,
-                x.CarType,
-                x.RegistrationNumber,
-                x.Status,
-                x.IsActive
-            }));
-            
+                SeedData.SeedCars();
+                dbContext.Cars.AddRange(SeedData.Cars);
+                dbContext.SaveChanges();
+            }
+
             Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedCars)} Completed.");
         }
 
-        private static void SeedContacts(this ModelBuilder modelBuilder)
+        private static void SeedContacts(this BookingsDbContext dbContext)
         {
             Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedContacts)} Started...");
-            
-            SeedData.SeedContacts();
-            modelBuilder.Entity<Contact>().HasData(SeedData.Contacts.Select(x => new
+
+            if (!dbContext.Contacts.Any())
             {
-                x.Id,
-                x.LicenseNumber,
-                x.GivenName,
-                x.Surname,
-                x.Email,
-                x.Phone,
-                x.IsActive
-            }));
-            
+                SeedData.SeedContacts();
+                dbContext.Contacts.AddRange(SeedData.Contacts);
+                dbContext.SaveChanges();
+            }
+
             Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedContacts)} Completed.");
         }
 
-        private static void SeedBookings(this ModelBuilder modelBuilder)
+        private static void SeedSchedules(this BookingsDbContext dbContext)
         {
-            Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedSchedule)} Started...");
-            
-            SeedData.SeedBookings();
-            modelBuilder.Entity<Booking>().HasData(SeedData.Bookings.Select(x => new
+            Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedSchedules)} Started...");
+
+            if (!dbContext.Schedules.Any())
             {
-                x.Id,
-                x.BookingReference,
-                ContactId = x.Contact.Id,       // Foreign key for Contact
-                CarId = x.Car.Id,               // Foreign key for Car
-                x.PickupDateTime, 
-                x.ReturnDateTime,
-                x.TimeRange,
-                x.Status,
-                x.StatusChangedOn,
-                x.CreatedOn,
-                x.LastModifiedOn
-            }));
-                
-            Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedSchedule)} Completed.");
+                SeedData.SeedSchedules();
+                dbContext.Schedules.AddRange(SeedData.Schedules);
+                dbContext.SaveChanges();
+            }
+
+            Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedSchedules)} Completed.");
         }
 
-        private static void SeedSchedule(this ModelBuilder modelBuilder)
+        private static void SeedBookings(this BookingsDbContext dbContext)
         {
-            Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedSchedule)} Started...");
-            
-            SeedData.SeedSchedules();
-            modelBuilder.Entity<Schedule>().HasData(SeedData.Schedules.Select(x => new
+            Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedBookings)} Started...");
+
+            if (!dbContext.Bookings.Any())
             {
-                x.Id,
-                x.LocationCode,
-                x.CreatedOn
-            }));
-            
-            Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedSchedule)} Completed.");
+                var contacts = dbContext.Contacts.ToList();
+                var cars = dbContext.Cars.ToList();
+                SeedData.SeedBookings(contacts, cars);
+                
+                dbContext.Bookings.AddRange(SeedData.Bookings);
+                dbContext.SaveChanges();
+            }
+
+            Log.Debug($"{nameof(DataSeeder)}:{nameof(SeedBookings)} Completed.");
         }
     }
 
@@ -103,14 +87,6 @@ namespace Praedico.Bookings.Infrastructure.Data
         public static List<Contact> Contacts { get; private set; } = [];
         public static List<Booking> Bookings { get; private set; } = [];
         public static List<Schedule> Schedules { get; private set; } = [];
-
-        public static void SeedAll()
-        {
-            SeedCars();
-            SeedContacts();
-            SeedBookings();
-            SeedSchedules();
-        }
 
         public static void SeedCars()
         {
@@ -138,48 +114,43 @@ namespace Praedico.Bookings.Infrastructure.Data
             ];
         }
 
-        public static void SeedBookings()
+        public static void SeedBookings(List<Contact> contacts, List<Car> cars)
         {
             Bookings =
             [
                 Booking.Create(
-                    Contacts.First(x => x.LicenseNumber == "MARV01"),
-                    Cars.First(x => x.RegistrationNumber == "SPIDERMAN"),
+                    contacts.First(x => x.LicenseNumber == "MARV01"),
+                    cars.First(x => x.RegistrationNumber == "SPIDERMAN"),
                     DateTime.UtcNow.AddHours(1),
                     DateTime.UtcNow.AddDays(1)
                 ),
-
                 Booking.Create(
-                    Contacts.First(x => x.LicenseNumber == "MARV02"),
-                    Cars.First(x => x.RegistrationNumber == "IRONMAN"),
+                    contacts.First(x => x.LicenseNumber == "MARV02"),
+                    cars.First(x => x.RegistrationNumber == "IRONMAN"),
                     DateTime.UtcNow.AddHours(2),
                     DateTime.UtcNow.AddDays(2)
                 ),
-
                 Booking.Create(
-                    Contacts.First(x => x.LicenseNumber == "MARV03"),
-                    Cars.First(x => x.RegistrationNumber == "HULK"),
+                    contacts.First(x => x.LicenseNumber == "MARV03"),
+                    cars.First(x => x.RegistrationNumber == "HULK"),
                     DateTime.UtcNow.AddHours(3),
                     DateTime.UtcNow.AddDays(3)
                 ),
-
                 Booking.Create(
-                    Contacts.First(x => x.LicenseNumber == "DC0001"),
-                    Cars.First(x => x.RegistrationNumber == "SUPERMAN"),
+                    contacts.First(x => x.LicenseNumber == "DC0001"),
+                    cars.First(x => x.RegistrationNumber == "SUPERMAN"),
                     DateTime.UtcNow.AddHours(4),
                     DateTime.UtcNow.AddDays(4)
                 ),
-
                 Booking.Create(
-                    Contacts.First(x => x.LicenseNumber == "DC0002"),
-                    Cars.First(x => x.RegistrationNumber == "BATMOBILE"),
+                    contacts.First(x => x.LicenseNumber == "DC0002"),
+                    cars.First(x => x.RegistrationNumber == "BATMOBILE"),
                     DateTime.UtcNow.AddHours(5),
                     DateTime.UtcNow.AddDays(5)
                 ),
-
                 Booking.Create(
-                    Contacts.First(x => x.LicenseNumber == "DC0003"),
-                    Cars.First(x => x.RegistrationNumber == "LEXCORP"),
+                    contacts.First(x => x.LicenseNumber == "DC0003"),
+                    cars.First(x => x.RegistrationNumber == "LEXCORP"),
                     DateTime.UtcNow.AddHours(6),
                     DateTime.UtcNow.AddDays(6)
                 )
