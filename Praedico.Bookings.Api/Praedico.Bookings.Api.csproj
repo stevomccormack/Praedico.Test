@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Praedico.Bookings.Application\Praedico.Bookings.Application.csproj" />
+      <ProjectReference Include="..\Praedico.Bookings.Core\Praedico.Bookings.Core.csproj" />
+      <ProjectReference Include="..\Praedico.Bookings.Domain\Praedico.Bookings.Domain.csproj" />
+      <ProjectReference Include="..\Praedico.Bookings.Infrastructure\Praedico.Bookings.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>

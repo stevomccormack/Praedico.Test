@@ -1,0 +1,70 @@
+# Booking API 
+@Api_HostAddress = http://localhost:5270
+
+# Get All Bookings
+GET {{Api_HostAddress}}/api/bookings
+Accept: application/json
+
+
+# Get Booking By Reference
+GET {{Api_HostAddress}}/api/bookings/{bookingReference}
+Accept: application/json
+
+### Example
+GET {{Api_HostAddress}}/api/bookings/BK-12345
+Accept: application/json
+
+
+# Check Booking Availability
+GET {{Api_HostAddress}}/api/bookings/availability
+Accept: application/json
+
+### Query Parameters Example
+GET {{Api_HostAddress}}/api/bookings/availability?pickupDateTime=2024-12-01T10:00:00Z&returnDateTime=2024-12-10T10:00:00Z&carTypes=Compact,SUV
+Accept: application/json
+
+
+# Create Booking
+POST {{Api_HostAddress}}/api/bookings
+Content-Type: application/json
+Accept: application/json
+
+{
+    "contactLicenseNumber": "DL12345678",
+    "contactGivenName": "John",
+    "contactSurname": "Doe",
+    "carRegistrationNumber": "SUPERMAN",
+    "carType": "SUV",
+    "pickupDateTime": "2024-12-01T10:00:00Z",
+    "returnDateTime": "2024-12-10T10:00:00Z"
+}
+
+
+# Update Booking
+PUT {{Api_HostAddress}}/api/bookings/{bookingReference}
+Content-Type: application/json
+Accept: application/json
+
+### Example
+PUT {{Api_HostAddress}}/api/bookings/BK-12345
+Content-Type: application/json
+Accept: application/json
+
+{
+    "contactLicenseNumber": "DL12345678",
+    "contactGivenName": "John",
+    "contactSurname": "Smith",
+    "carRegistrationNumber": "CAR-789",
+    "carType": "SUV",
+    "pickupDateTime": "2024-12-02T10:00:00Z",
+    "returnDateTime": "2024-12-12T10:00:00Z"
+}
+
+
+# Delete Booking
+DELETE {{Api_HostAddress}}/api/bookings/{bookingReference}
+Accept: application/json
+
+### Example
+DELETE {{Api_HostAddress}}/api/bookings/BK-12345
+Accept: application/json

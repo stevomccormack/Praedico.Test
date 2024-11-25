@@ -1,0 +1,127 @@
+# Ignore user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# Ignore build results
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Aa]pp[Bb]undle/
+
+# Ignore node_modules for frontend or Node.js integrations
+node_modules/
+
+# Ignore test results and logs
+[Tt]est[Rr]esult*/
+[Ll]ogs/
+[Bb]uild[Ll]og.*
+*.log
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.cache
+*.vspscc
+*.vssscc
+*.pidb
+*.svclog
+
+# Ignore Visual Studio profiler files
+*.psess
+*.vsp
+*.vspx
+
+# Ignore ClickOnce
+publish/
+*.publishsettings
+
+# Ignore ReSharper and Rider
+_ReSharper*/
+*.DotSettings.user
+.idea/
+
+# Ignore StyleCop
+[Ss]tyle[Cc]op.*
+[Ss]tyle[Cc]op.targets
+
+# Ignore NuGet and packages
+*.nupkg
+packages/
+*.nuget.cache
+*.snupkg
+*.nuspec
+
+# Ignore Azure-related build output
+*.build.csdef
+*.azurePubxml
+
+# Ignore macOS-specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Ignore Windows-specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Ignore backup and report files
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+
+# Ignore SQL Server files
+App_Data/*.mdf
+App_Data/*.ldf
+
+# Ignore compiled Typescript files
+*.tsbuildinfo
+
+# Ignore IDE folders
+.vscode/
+.vs/
+
+# Ignore NCrunch files
+_NCrunch_*
+*.ncrunchsolution
+*.ncrunchproject
+
+# Ignore Yarn files
+.yarn/
+.yarnrc.yml
+
+# Ignore sensitive files (add exceptions if necessary)
+.env
+.env.*
+secrets.json
+
+# Ignore artifacts
+*.dll
+*.exe
+*.app
+*.dylib
+*.so
+*.lib
+*.dll.config
+*.config.json
+
+# Ignore migration folders
+Migrations/
+
+# Ignore any generated code
+Generated_Code/
+ServiceReferences/
+ConnectedServices/
+
+# Ignore temporary files created by editors
+~$*
+*~
+
