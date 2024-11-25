@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Serilog;
 
 namespace Praedico.Bookings.Infrastructure.Data.Converters;
 
@@ -25,9 +26,15 @@ public static class ValueConverterExtensions
             foreach (var property in entityType.GetProperties())
             {
                 if (property.ClrType == typeof(DateTime))
+                {
                     property.SetValueConverter(ValueConverters.DateTimeUtcConverter);
+                    Log.Debug($"{nameof(ValueConverterExtensions)}:{nameof(ApplyValueConverters)} SetValueConverter for DateTime property: {entityType.Name}.{property.Name} has been applied...");
+                }
                 else if (property.ClrType == typeof(DateTime?))
+                {
                     property.SetValueConverter(ValueConverters.NullableDateTimeUtcConverter);
+                    Log.Debug($"{nameof(ValueConverterExtensions)}:{nameof(ApplyValueConverters)} SetValueConverter for DateTime? property: {entityType.Name}.{property.Name} has been applied...");
+                }
             }
         }
     }

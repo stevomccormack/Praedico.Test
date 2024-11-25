@@ -9,16 +9,19 @@ public static class ServiceBuilder
     public static void ConfigureServices(this IServiceCollection services)
     {
         services.AddApplication();
-        services.AddInfrastructure();
+        services.AddInfrastructure();        
+        services.AddApi();
         
         //services.AddOpenApi();
         //services.AddEndpointsApiExplorer();
         //services.AddSwaggerGen();
+        
     }
     
-    private static void AddApiHandlers(this IServiceCollection services)
+    private static void AddApi(this IServiceCollection services)
     {
-        services.AddTransient<BookingApiCommandHandler>();  
-        services.AddTransient<BookingApiQueryHandler>();
+        services.AddScoped<BookingApiCommandHandler>();  
+        services.AddScoped<BookingApiQueryHandler>();
     }
+
 }

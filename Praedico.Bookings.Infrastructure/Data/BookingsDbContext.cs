@@ -7,14 +7,12 @@ using Praedico.Bookings.Infrastructure.Data.Converters;
 
 namespace Praedico.Bookings.Infrastructure.Data
 {
-    public class BookingsDbContext : DbContext
+    public class BookingsDbContext(DbContextOptions<BookingsDbContext> options) : DbContext(options)
     {
         public DbSet<Booking> Bookings { get; set; } = null!;
         public DbSet<Car> Cars { get; set; } = null!;
         public DbSet<Contact> Contacts { get; set; } = null!;
         public DbSet<Schedule> Schedules { get; set; } = null!;
-
-        public BookingsDbContext(DbContextOptions<BookingsDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

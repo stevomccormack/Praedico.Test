@@ -2,14 +2,9 @@
 
 namespace Praedico.Bookings.Application.Schedules;
 
-public class ScheduleCommandHandler
+public class ScheduleCommandHandler(IScheduleCommandRepository carCommandRepository)
 {
-    private IScheduleCommandRepository ScheduleCommandRepository{ get; }
-
-    public ScheduleCommandHandler(IScheduleCommandRepository carCommandRepository)
-    {
-        ScheduleCommandRepository = carCommandRepository;
-    }
+    private IScheduleCommandRepository ScheduleCommandRepository{ get; } = carCommandRepository;
 
     public async Task<Schedule> CreateSchedule(CreateScheduleRequest request, CancellationToken cancellationToken = default)
     {

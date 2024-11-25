@@ -4,16 +4,10 @@
 
 namespace Praedico.Bookings.Application.Bookings;
 
-public class BookingQueryHandler
+public class BookingQueryHandler(IBookingQueryRepository bookingQueryRepository)
 {
-    private IBookingQueryRepository BookingQueryRepository{ get; }
+    private IBookingQueryRepository BookingQueryRepository{ get; } = bookingQueryRepository;
 
-    public BookingQueryHandler(
-        IBookingQueryRepository bookingQueryRepository)
-    {
-        BookingQueryRepository = bookingQueryRepository;
-    }
-    
     public async Task<IReadOnlyList<Booking>> GetAllBookings(CancellationToken cancellationToken = default)
     {
         return await BookingQueryRepository.ListAsync(cancellationToken: cancellationToken);

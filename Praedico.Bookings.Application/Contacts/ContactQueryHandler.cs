@@ -4,15 +4,10 @@
 
 namespace Praedico.Bookings.Application.Contacts;
 
-public class ContactQueryHandler
+public class ContactQueryHandler(IContactQueryRepository carQueryRepository)
 {
-    private IContactQueryRepository ContactQueryRepository{ get; }
+    private IContactQueryRepository ContactQueryRepository{ get; } = carQueryRepository;
 
-    public ContactQueryHandler(IContactQueryRepository carQueryRepository)
-    {
-        ContactQueryRepository = carQueryRepository;
-    }
-    
     public async Task<IReadOnlyList<Contact>> GetAllContacts(CancellationToken cancellationToken = default)
     {
         return await ContactQueryRepository.ListAsync(cancellationToken: cancellationToken);

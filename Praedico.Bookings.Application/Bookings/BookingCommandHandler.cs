@@ -7,21 +7,14 @@ using Praedico.Bookings.Domain.Schedules;
 
 namespace Praedico.Bookings.Application.Bookings;
 
-public class BookingCommandHandler
+public class BookingCommandHandler(
+    IBookingCommandRepository bookingCommandRepository,
+    ICarQueryRepository carQueryRepository,
+    IContactQueryRepository contactQueryRepository)
 {
-    private IBookingCommandRepository BookingCommandRepository{ get; }
-    private ICarQueryRepository CarQueryRepository{ get; }
-    private IContactQueryRepository ContactQueryRepository{ get; }
-
-    public BookingCommandHandler(
-        IBookingCommandRepository bookingCommandRepository,
-        ICarQueryRepository carQueryRepository,
-        IContactQueryRepository contactQueryRepository)
-    {
-        BookingCommandRepository = bookingCommandRepository;
-        CarQueryRepository = carQueryRepository;
-        ContactQueryRepository = contactQueryRepository;
-    }
+    private IBookingCommandRepository BookingCommandRepository{ get; } = bookingCommandRepository;
+    private ICarQueryRepository CarQueryRepository{ get; } = carQueryRepository;
+    private IContactQueryRepository ContactQueryRepository{ get; } = contactQueryRepository;
 
     public async Task<Booking> CreateBooking(CreateBookingRequest request, CancellationToken cancellationToken = default)
     {

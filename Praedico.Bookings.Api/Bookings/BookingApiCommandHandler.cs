@@ -5,21 +5,14 @@ using Praedico.Bookings.Application.Contacts;
 
 namespace Praedico.Bookings.Api.Bookings;
 
-public class BookingApiCommandHandler
+public class BookingApiCommandHandler(
+    BookingCommandHandler bookingCommandHandler,
+    CarQueryHandler carQueryHandler,
+    ContactQueryHandler contactQueryHandler)
 {
-    private BookingCommandHandler BookingCommandHandler{ get; }
-    private CarQueryHandler CarQueryHandler{ get; }
-    private ContactQueryHandler ContactQueryHandler{ get; }
-
-    public BookingApiCommandHandler(
-        BookingCommandHandler bookingCommandHandler,
-        CarQueryHandler carQueryHandler,
-        ContactQueryHandler contactQueryHandler)
-    {
-        BookingCommandHandler = bookingCommandHandler;
-        CarQueryHandler = carQueryHandler;
-        ContactQueryHandler = contactQueryHandler;
-    }
+    private BookingCommandHandler BookingCommandHandler{ get; } = bookingCommandHandler;
+    private CarQueryHandler CarQueryHandler{ get; } = carQueryHandler;
+    private ContactQueryHandler ContactQueryHandler{ get; } = contactQueryHandler;
 
     public async Task<IResult> CreateBooking(CreateBookingRequest request, CancellationToken cancellationToken = default)
     {

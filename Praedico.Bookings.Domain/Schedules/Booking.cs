@@ -10,9 +10,9 @@ public class Booking: Entity
     private const int MinBookingTimeInHours = 1;
     private const int MaxBookingTimeInDays = 180;
     public string BookingReference { get; } = GenerateBookingReference(); //unique
-    public DateTimeRange TimeRange { get; private set; }
-    public DateTime PickupDateTime => TimeRange.Start;
-    public DateTime ReturnDateTime => TimeRange.End;
+    public DateTime PickupDateTime { get; private set; }
+    public DateTime ReturnDateTime { get; private set; }
+    public DateTimeRange TimeRange => DateTimeRange.Create(PickupDateTime, ReturnDateTime);
     public BookingStatus Status { get; private set; } = BookingStatus.Placed;
     public DateTime? StatusChangedOn { get; private set; }
     public DateTime CreatedOn { get; } = DateTime.UtcNow;
@@ -20,12 +20,9 @@ public class Booking: Entity
     public Contact Contact { get; private set; }
     public Car Car { get; private set; }
 
-    private Booking(Guid id, Contact contact, Car car, DateTimeRange timeRange) : base(id)
+    private Booking(Guid id) : base(id)
     {
-        //Location
-        Contact = contact;
-        Car = car;
-        TimeRange = timeRange;
+        
     }
 
     public static Booking Create(Contact contact, Car car, DateTime pickupDateTime, DateTime returnDateTime)
@@ -34,15 +31,19 @@ public class Booking: Entity
         Guard.Against.Null(car, nameof(car));
         Guard.Against.Null(pickupDateTime, nameof(pickupDateTime));
         Guard.Against.Null(returnDateTime, nameof(returnDateTime));
-
+        
         var timeRange = DateTimeRange.Create(pickupDateTime, returnDateTime);
         Guard.Against.MinAllowedBookingTime(timeRange);
         Guard.Against.MaxAllowedBookingTime(timeRange, MaxBookingTimeInDays);
         Guard.Against.HistoricalBookingTime(timeRange);
 
-        var booking = new Booking(Guid.NewGuid(), contact, car, timeRange);
-
-        return booking;
+        return new Booking(Guid.NewGuid())
+        {
+            PickupDateTime = pickupDateTime,
+            ReturnDateTime = returnDateTime,
+            Contact = contact,
+            Car = car
+        };
     }
 
     public void Confirm()
@@ -56,18 +57,23 @@ public class Booking: Entity
         ChangeStatus(BookingStatus.Confirmed);
     }
 
-    public void ReSchedule(DateTimeRange timeRange)
+    public void ReSchedule(DateTime pickupDateTime, DateTime returnDateTime)
     {
-        Guard.Against.Null(timeRange, nameof(timeRange));
+        Guard.Against.Null(pickupDateTime, nameof(pickupDateTime));
+        Guard.Against.Null(returnDateTime, nameof(returnDateTime));
         Guard.Against.InactiveContact(Contact);
         Guard.Against.InactiveCar(Car);
+
+        var timeRange = DateTimeRange.Create(pickupDateTime, returnDateTime);
         Guard.Against.MinAllowedBookingTime(timeRange, MinBookingTimeInHours);
         Guard.Against.MaxAllowedBookingTime(timeRange, MaxBookingTimeInDays);
         Guard.Against.ChangeHistoricalBooking(this);
         Guard.Against.ChangeTerminatedBooking(this);
 
-        if (!TimeRange.Equals(timeRange))
-            TimeRange = timeRange;
+        if (!PickupDateTime.Equals(pickupDateTime))
+            PickupDateTime = pickupDateTime;
+        if (!ReturnDateTime.Equals(returnDateTime))
+            ReturnDateTime = returnDateTime;
 
         ChangeStatus(BookingStatus.Confirmed);
     }

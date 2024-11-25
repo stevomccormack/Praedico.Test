@@ -17,7 +17,7 @@ $Git = [pscustomobject]@{
 }
 
 $GitHub = [pscustomobject]@{    
-    Repo = "Praedico.Bookings"
+    Repo = "Praedico.Test"
     Owner = "stevomccormack"
 }
 
@@ -52,6 +52,24 @@ Write-Host "`$GitHub.Owner: " -ForegroundColor Green -NoNewline; Write-Host "$($
 
 
 
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Check .NET versions
+#-----------------------------------------------------------------------------------------------------------------------
+dotnet --list-sdks
+dotnet --list-runtimes
+
+dotnet dev-certs https --trust
+
+Push-Location $Praedico.ApiDirectoryPath
+
+    dotnet add package Serilog.AspNetCore
+    dotnet add package Serilog.Sinks.Console
+    dotnet add package Serilog.Sinks.File
+    dotnet add package Serilog.Settings.Configuration
+    dotnet add package Serilog.Enrichers
+
+Pop-Location
 
 
 

@@ -4,13 +4,13 @@ namespace Praedico.Bookings.Api.Bookings;
 
 public static class BookingEndpoints
 {
-    public static void ConfigureBookingEndpoints(this WebApplication app)
+    public static void UseBookingEndpoints(this WebApplication app)
     {
-        app.ConfigureBookingCommandEndpoints();
-        app.ConfigureBookingQueryEndpoints();
+        app.MapBookingCommandEndpoints();
+        app.MapBookingQueryEndpoints();
     }
 
-    public static void ConfigureBookingQueryEndpoints(this WebApplication app)
+    private static void MapBookingQueryEndpoints(this WebApplication app)
     {
         // rest
         app.MapGet("/api/bookings", (BookingQueryHandler handlers, CancellationToken cancellationToken) => 
@@ -26,7 +26,8 @@ public static class BookingEndpoints
                 handlers.CheckAvailabilityAsync(pickupDateTime, returnDateTime, carTypes, cancellationToken))
             .WithName("CheckBookingAvailability");
     }
-    public static void ConfigureBookingCommandEndpoints(this WebApplication app)
+
+    private static void MapBookingCommandEndpoints(this WebApplication app)
     {
         // rest
         app.MapPost("/api/bookings", (BookingCommandHandler handlers, CreateBookingRequest request, CancellationToken cancellationToken) => 

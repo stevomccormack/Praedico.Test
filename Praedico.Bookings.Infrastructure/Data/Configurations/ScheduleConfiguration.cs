@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Praedico.Bookings.Domain.Schedules;
+using Serilog;
 
 namespace Praedico.Bookings.Infrastructure.Data.Configurations;
 
@@ -8,20 +9,19 @@ internal class ScheduleConfiguration : IEntityTypeConfiguration<Schedule>
 {
     public void Configure(EntityTypeBuilder<Schedule> builder)
     {
-        // Primary Key
-        builder.HasKey(x => x.Id);
-
-        // Properties
-        builder.Property(x => x.LocationCode)
-            .IsRequired();
+        Log.Debug($"{nameof(ScheduleConfiguration)}:{nameof(IEntityTypeConfiguration<Schedule>)} Started...");
         
-        builder.Property(x => x.CreatedOn)
-            .IsRequired();
+        builder.HasKey(x => x.Id);
+        builder.Ignore(x => x.DomainEvents);
 
-        // Relationships
+        builder.Property(x => x.LocationCode).IsRequired();
+        builder.Property(x => x.CreatedOn).HasColumnName("CreatedOnUtc").IsRequired().HasDefaultValueSql("GETUTCDATE()");
+
         builder.HasMany(x => x.Bookings)
             .WithOne()
-            .HasForeignKey("ScheduleId") // Foreign key in the Bookings table
+            .HasForeignKey("ScheduleId")
             .OnDelete(DeleteBehavior.Cascade); // If a schedule is deleted, delete its bookings as well
+        
+        Log.Debug($"{nameof(ScheduleConfiguration)}:{nameof(IEntityTypeConfiguration<Schedule>)} Completed.");
     }
 }

@@ -6,13 +6,8 @@ using Praedico.Bookings.Infrastructure.Data;
 
 namespace Praedico.Bookings.Infrastructure.Repositories;
 
-public class CarQueryRepository : QueryRepository<Car>, ICarQueryRepository
+public class CarQueryRepository(BookingsDbContext dbContext) : QueryRepository<Car>(dbContext), ICarQueryRepository
 {
-    public CarQueryRepository(BookingsDbContext dbContext) : base(dbContext)
-    {
-        
-    }
-
     public async Task<Car?> GetUniqueAsync(string registrationNumber, CancellationToken cancellationToken = default)
     {
         var normalized = registrationNumber.ToLower();

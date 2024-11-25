@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Praedico.Bookings.Domain;
 using Praedico.Bookings.Domain.Schedules;
+using Serilog;
 
 namespace Praedico.Bookings.Infrastructure.Data.Configurations;
 
@@ -9,57 +10,35 @@ internal class BookingConfiguration : IEntityTypeConfiguration<Booking>
 {
     public void Configure(EntityTypeBuilder<Booking> builder)
     {
-        // Primary Key
+        Log.Debug($"{nameof(BookingConfiguration)}:{nameof(IEntityTypeConfiguration<Booking>)} Started...");
+
         builder.HasKey(x => x.Id);
-
-        // Properties
-        builder.Property(x => x.BookingReference)
-            .IsRequired()
-            .HasMaxLength(50);
-
-        builder.OwnsOne(x => x.TimeRange, timeRange =>
-        {
-            timeRange.Property(tr => tr.Start)
-                //.HasColumnName("PickupDateTime")
-                .IsRequired();
-
-            timeRange.Property(tr => tr.End)
-                //.HasColumnName("ReturnDateTime")
-                .IsRequired();
-        }).Navigation(p => p.TimeRange).IsRequired();
-
-        // Ignore computed
-        builder.Ignore(x => x.PickupDateTime);
-        builder.Ignore(x => x.ReturnDateTime);
-
+        builder.HasIndex(x => x.BookingReference).IsUnique();
+        builder.Ignore(x => x.DomainEvents);
+        
+        builder.Property(x => x.BookingReference).IsRequired().HasMaxLength(50);
+        builder.Property(x => x.PickupDateTime).HasColumnName("PickupDateTimeUtc").IsRequired();
+        builder.Property(x => x.ReturnDateTime).HasColumnName("ReturnDateTimeUtc").IsRequired();
+        
         builder.Property(x => x.Status)
-            .IsRequired()
             .HasConversion(
                 convertToProviderExpression: v => v.Name,
-                convertFromProviderExpression: v => Enumeration.FromName<BookingStatus>(v)
+                convertFromProviderExpression: v => Enumeration.FromName<BookingStatus>(v) 
             )
             .HasMaxLength(50);
+        
+        builder.Property(x => x.CreatedOn).HasColumnName("CreatedOnUtc").IsRequired().HasDefaultValueSql("GETUTCDATE()");
 
-        builder.Property(x => x.CreatedOn)
-            .IsRequired();
-
-        builder.Property(x => x.LastModifiedOn);
-
-        builder.Property(x => x.StatusChangedOn);
-
-        // Indexes
-        builder.HasIndex(x => x.BookingReference, "IX_Booking_BookingReference")
-            .IsUnique();
-
-        // Relationships
         builder.HasOne(x => x.Contact)
-            .WithMany()
+            .WithMany() // No navigation from Contact back to Booking.
             .HasForeignKey("ContactId")
-            .IsRequired();
+            .IsRequired(); // Ensures Contact is required.
 
         builder.HasOne(x => x.Car)
-            .WithMany()
-            .HasForeignKey("CarId")
-            .IsRequired();
+            .WithMany() // No navigation from Car back to Booking.
+            .HasForeignKey("ContactId")
+            .IsRequired(); // Ensures Car is required.
+        
+        Log.Debug($"{nameof(BookingConfiguration)}:{nameof(IEntityTypeConfiguration<Booking>)} Completed.");
     }
 }

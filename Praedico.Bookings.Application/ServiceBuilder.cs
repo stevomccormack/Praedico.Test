@@ -15,14 +15,14 @@ public static class ServiceBuilder
     
     private static void AddHandlers(this IServiceCollection services)
     {
-        services.AddTransient<BookingCommandHandler>();        
-        services.AddTransient<CarCommandHandler>();        
-        services.AddTransient<ContactCommandHandler>();        
-        services.AddTransient<ScheduleCommandHandler>();
+        services.AddScoped<BookingCommandHandler>();        
+        services.AddScoped<CarCommandHandler>();        
+        services.AddScoped<ContactCommandHandler>();        
+        services.AddScoped<ScheduleCommandHandler>();
         
-        services.AddTransient<BookingQueryHandler>();
-        services.AddTransient<CarQueryHandler>();
-        services.AddTransient<ContactQueryHandler>();
-        services.AddTransient<ScheduleQueryHandler>();
+        services.AddScoped<BookingQueryHandler>();
+        services.AddScoped<CarQueryHandler>();
+        services.AddScoped<ContactQueryHandler>();
+        services.AddScoped<ScheduleQueryHandler>();
     }
 }

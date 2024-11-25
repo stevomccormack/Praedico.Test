@@ -2,14 +2,9 @@
 
 namespace Praedico.Bookings.Application.Contacts;
 
-public class ContactCommandHandler
+public class ContactCommandHandler(IContactCommandRepository carCommandRepository)
 {
-    private IContactCommandRepository ContactCommandRepository{ get; }
-
-    public ContactCommandHandler(IContactCommandRepository carCommandRepository)
-    {
-        ContactCommandRepository = carCommandRepository;
-    }
+    private IContactCommandRepository ContactCommandRepository{ get; } = carCommandRepository;
 
     public async Task<Contact> CreateContact(CreateContactRequest request, CancellationToken cancellationToken = default)
     {

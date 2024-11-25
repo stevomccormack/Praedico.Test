@@ -6,13 +6,9 @@ using Praedico.Bookings.Infrastructure.Data;
 
 namespace Praedico.Bookings.Infrastructure.Repositories;
 
-public class ContactQueryRepository : QueryRepository<Contact>, IContactQueryRepository
+public class ContactQueryRepository(BookingsDbContext dbContext)
+    : QueryRepository<Contact>(dbContext), IContactQueryRepository
 {
-    public ContactQueryRepository(BookingsDbContext dbContext) : base(dbContext)
-    {
-        
-    }
-
     public async Task<Contact?> GetUniqueAsync(string licenseNumber, CancellationToken cancellationToken = default)
     {
         var normalized = licenseNumber.ToLower();

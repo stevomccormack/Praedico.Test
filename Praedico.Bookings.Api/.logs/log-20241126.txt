@@ -1,0 +1,92 @@
+2024-11-26 00:24:36.957 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 00:24:37.041 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 00:24:37.047 +11:00 [INF] Hosting environment: Development
+2024-11-26 00:24:37.050 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 00:24:53.550 +11:00 [INF] HTTP GET / responded 404 in 2.1422 ms
+2024-11-26 00:35:07.090 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 00:35:07.186 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 00:35:07.189 +11:00 [INF] Hosting environment: Development
+2024-11-26 00:35:07.191 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 00:35:35.261 +11:00 [INF] HTTP GET / responded 404 in 0.9764 ms
+2024-11-26 00:42:02.337 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 00:42:02.413 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 00:42:02.416 +11:00 [INF] Hosting environment: Development
+2024-11-26 00:42:02.419 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 00:42:32.408 +11:00 [INF] HTTP GET / responded 404 in 0.6093 ms
+2024-11-26 00:46:09.579 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 00:46:09.647 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 00:46:09.650 +11:00 [INF] Hosting environment: Development
+2024-11-26 00:46:09.653 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 00:46:10.842 +11:00 [INF] HTTP GET / responded 404 in 1.9033 ms
+2024-11-26 00:49:35.862 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 00:49:36.034 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 00:49:36.036 +11:00 [INF] Hosting environment: Development
+2024-11-26 00:49:36.039 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 00:49:36.307 +11:00 [INF] HTTP GET / responded 404 in 2.8823 ms
+2024-11-26 00:52:45.151 +11:00 [WRN] The ASP.NET Core developer certificate is not trusted. For information about trusting the ASP.NET Core developer certificate, see https://aka.ms/aspnet/https-trust-dev-cert
+2024-11-26 00:52:46.137 +11:00 [INF] Now listening on: https://localhost:7143
+2024-11-26 00:52:46.141 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 00:52:46.147 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 00:52:46.150 +11:00 [INF] Hosting environment: Development
+2024-11-26 00:52:46.152 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 00:53:20.317 +11:00 [INF] Application is shutting down...
+2024-11-26 00:55:40.771 +11:00 [WRN] The ASP.NET Core developer certificate is not trusted. For information about trusting the ASP.NET Core developer certificate, see https://aka.ms/aspnet/https-trust-dev-cert
+2024-11-26 00:55:41.136 +11:00 [INF] Now listening on: https://localhost:7143
+2024-11-26 00:55:41.140 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 00:55:41.144 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 00:55:41.147 +11:00 [INF] Hosting environment: Development
+2024-11-26 00:55:41.153 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 00:55:46.630 +11:00 [INF] HTTP GET / responded 404 in 2.5207 ms
+2024-11-26 00:55:58.864 +11:00 [INF] Application is shutting down...
+2024-11-26 00:56:16.814 +11:00 [WRN] The ASP.NET Core developer certificate is not trusted. For information about trusting the ASP.NET Core developer certificate, see https://aka.ms/aspnet/https-trust-dev-cert
+2024-11-26 00:56:17.178 +11:00 [INF] Now listening on: https://localhost:7143
+2024-11-26 00:56:17.182 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 00:56:17.186 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 00:56:17.187 +11:00 [INF] Hosting environment: Development
+2024-11-26 00:56:17.190 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 00:56:17.945 +11:00 [INF] HTTP GET / responded 404 in 1.4532 ms
+2024-11-26 00:57:01.247 +11:00 [INF] Application is shutting down...
+2024-11-26 00:57:21.436 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 00:57:21.528 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 00:57:21.530 +11:00 [INF] Hosting environment: Development
+2024-11-26 00:57:21.532 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 00:57:25.623 +11:00 [INF] HTTP GET / responded 404 in 0.8475 ms
+2024-11-26 01:29:48.710 +11:00 [FTL] Application startup exception
+System.InvalidOperationException: Unable to resolve service for type 'Microsoft.AspNetCore.Cors.Infrastructure.ICorsService' while attempting to activate 'Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2024-11-26 01:29:48.888 +11:00 [ERR] Hosting failed to start
+System.InvalidOperationException: Unable to resolve service for type 'Microsoft.AspNetCore.Cors.Infrastructure.ICorsService' while attempting to activate 'Microsoft.AspNetCore.Cors.Infrastructure.CorsMiddleware'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2024-11-26 01:30:47.125 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 01:30:47.313 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 01:30:47.315 +11:00 [INF] Hosting environment: Development
+2024-11-26 01:30:47.318 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 01:30:47.322 +11:00 [INF] Application started
+2024-11-26 01:30:47.577 +11:00 [INF] HTTP GET / responded 404 in 272.3968 ms
+2024-11-26 01:31:25.520 +11:00 [INF] HTTP GET /api/test responded 404 in 0.7340 ms
+2024-11-26 01:31:31.382 +11:00 [INF] HTTP GET /test responded 200 in 1.8669 ms
+2024-11-26 01:44:43.500 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 01:44:43.596 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 01:44:43.599 +11:00 [INF] Hosting environment: Development
+2024-11-26 01:44:43.601 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 01:44:43.607 +11:00 [INF] Application started
+2024-11-26 01:44:48.141 +11:00 [INF] HTTP GET / responded 404 in 162.6808 ms
+2024-11-26 01:46:49.642 +11:00 [INF] HTTP GET /test responded 200 in 56.9414 ms
+2024-11-26 01:50:36.870 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 01:50:36.949 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 01:50:36.951 +11:00 [INF] Hosting environment: Development
+2024-11-26 01:50:36.953 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 01:50:36.956 +11:00 [INF] Application started
+2024-11-26 01:50:55.756 +11:00 [INF] HTTP GET / responded 404 in 209.6717 ms

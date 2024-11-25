@@ -4,15 +4,10 @@
 
 namespace Praedico.Bookings.Application.Cars;
 
-public class CarQueryHandler
+public class CarQueryHandler(ICarQueryRepository carQueryRepository)
 {
-    private ICarQueryRepository CarQueryRepository{ get; }
+    private ICarQueryRepository CarQueryRepository{ get; } = carQueryRepository;
 
-    public CarQueryHandler(ICarQueryRepository carQueryRepository)
-    {
-        CarQueryRepository = carQueryRepository;
-    }
-    
     public async Task<IReadOnlyList<Car>> GetAllCars(CancellationToken cancellationToken = default)
     {
         return await CarQueryRepository.ListAsync(cancellationToken: cancellationToken);

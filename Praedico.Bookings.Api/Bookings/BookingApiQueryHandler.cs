@@ -3,15 +3,10 @@
 
 namespace Praedico.Bookings.Api.Bookings;
 
-public class BookingApiQueryHandler
+public class BookingApiQueryHandler(BookingQueryHandler bookingQueryHandler)
 {
-    private BookingQueryHandler BookingQueryHandler{ get; }
+    private BookingQueryHandler BookingQueryHandler{ get; } = bookingQueryHandler;
 
-    public BookingApiQueryHandler(BookingQueryHandler bookingQueryHandler)
-    {
-        BookingQueryHandler = bookingQueryHandler;
-    }
-    
     public async Task<IResult> GetAllBookings(CancellationToken cancellationToken = default)
     {
         var bookings = await BookingQueryHandler.GetAllBookings(cancellationToken: cancellationToken);

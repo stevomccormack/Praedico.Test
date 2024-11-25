@@ -4,12 +4,6 @@ using Praedico.Bookings.Infrastructure.Data;
 
 namespace Praedico.Bookings.Infrastructure.Repositories
 {
-    public class CarCommandRepository : CommandRepository<Car>, ICarCommandRepository
-    {
-        public CarCommandRepository(BookingsDbContext dbContext):
-            base(dbContext)
-        {
-            
-        }
-    }
+    public class CarCommandRepository(BookingsDbContext dbContext)
+        : CommandRepository<Car>(dbContext), ICarCommandRepository;
 }

@@ -47,14 +47,18 @@ public class Schedule: AggregateRoot
         //RaiseDomainEvent(new BookingConfirmed(booking, ...));
     }
 
-    public void RescheduleBooking(Booking booking, DateTimeRange rescheduledTimeRange)
+    public void RescheduleBooking(Booking booking, DateTime pickupDateTime, DateTime returnDateTime)
     {
         Guard.Against.Null(booking, nameof(booking));
+        Guard.Against.Null(pickupDateTime, nameof(pickupDateTime));
+        Guard.Against.Null(returnDateTime, nameof(returnDateTime));
+        
+        var rescheduledTimeRange = DateTimeRange.Create(pickupDateTime, returnDateTime);
         Guard.Against.Null(rescheduledTimeRange, nameof(rescheduledTimeRange));
         Guard.Against.InactiveCar(booking.Car);
         Guard.Against.Collisions(booking, rescheduledTimeRange, Bookings);
 
-        booking.ReSchedule(rescheduledTimeRange);
+        booking.ReSchedule(pickupDateTime, returnDateTime);
 
         //RaiseDomainEvent(new BookingRescheduled(booking, ...));
     }

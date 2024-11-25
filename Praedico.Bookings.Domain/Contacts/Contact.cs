@@ -46,18 +46,18 @@ public class Contact : Entity
         Surname = surname;
     }
     
-    public void SetEmail(string email)
+    public void SetEmail(string? email)
     {
-        Guard.Against.NullOrWhiteSpace(email, nameof(email));
-        Guard.Against.InvalidEmail(email);
+        if (!string.IsNullOrWhiteSpace(email))
+            Guard.Against.InvalidEmail(email);
         
         Email = email;
     }
     
-    public void SetPhone(string phone)
+    public void SetPhone(string? phone)
     {
-        Guard.Against.NullOrWhiteSpace(phone, nameof(phone));
-        Guard.Against.InvalidPhone(phone);
+        if (!string.IsNullOrWhiteSpace(phone))
+            Guard.Against.InvalidPhone(phone);
         
         Phone = phone;
     }

@@ -3,15 +3,9 @@
 /// <summary>
 /// Business Exception - distinguish business rule violations
 /// </summary>
-public class BusinessException : Exception
+public class BusinessException(string message, string? code = "BUSINESS_RULE_VIOLATION") : Exception(message)
 {
-    public string? Code { get; }
+    public string? Code { get; } = code;
 
-    public BusinessException(string message, string? code = "BUSINESS_RULE_VIOLATION") : 
-        base(message)
-    {
-        Code = code;
-    }
-    
     //InnerException
 }

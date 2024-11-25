@@ -4,17 +4,14 @@ using Praedico.Domain;
 
 namespace Praedico.Bookings.Infrastructure.Repositories;
 
-public class Repository<TEntity> : ICommandRepository<TEntity>, IQueryRepository<TEntity>
+public class Repository<TEntity>(
+    ICommandRepository<TEntity> commandRepository,
+    IQueryRepository<TEntity> queryRepository)
+    : ICommandRepository<TEntity>, IQueryRepository<TEntity>
     where TEntity : class, IEntity
 {
-    public ICommandRepository<TEntity> CommandRepository { get; }
-    public IQueryRepository<TEntity> QueryRepository { get; }
-    
-    public Repository(ICommandRepository<TEntity> commandRepository, IQueryRepository<TEntity> queryRepository)
-    {
-        CommandRepository = commandRepository;
-        QueryRepository = queryRepository;
-    }
+    private ICommandRepository<TEntity> CommandRepository { get; } = commandRepository;
+    private IQueryRepository<TEntity> QueryRepository { get; } = queryRepository;
 
     #region ICommandRepository Implementation
 

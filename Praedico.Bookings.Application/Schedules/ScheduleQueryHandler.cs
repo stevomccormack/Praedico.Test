@@ -4,15 +4,10 @@
 
 namespace Praedico.Bookings.Application.Schedules;
 
-public class ScheduleQueryHandler
+public class ScheduleQueryHandler(IScheduleQueryRepository carQueryRepository)
 {
-    private IScheduleQueryRepository ScheduleQueryRepository{ get; }
+    private IScheduleQueryRepository ScheduleQueryRepository{ get; } = carQueryRepository;
 
-    public ScheduleQueryHandler(IScheduleQueryRepository carQueryRepository)
-    {
-        ScheduleQueryRepository = carQueryRepository;
-    }
-    
     public async Task<IReadOnlyList<Schedule>> GetAllSchedules(CancellationToken cancellationToken = default)
     {
         return await ScheduleQueryRepository.ListAsync(cancellationToken: cancellationToken);
