@@ -125,3 +125,6 @@ ConnectedServices/
 ~$*
 *~
 
+
+# Ignore logs
+.logs/
