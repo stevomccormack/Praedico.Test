@@ -1,4 +1,5 @@
-﻿using Praedico.Bookings.Domain.Schedules;
+﻿using Praedico.Bookings.Domain.Cars;
+using Praedico.Bookings.Domain.Schedules;
 
 //Mediator - typically use Mediatr for CQRS handling
 
@@ -28,8 +29,13 @@ public class BookingQueryHandler(IBookingQueryRepository bookingQueryRepository)
         return await BookingQueryRepository.ExistsUniqueAsync(bookingReference, cancellationToken: cancellationToken);
     }
     
-    public async Task<bool> CheckAvailabilityAsync(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<CarType>> CheckCarTypeAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
     {
-        return await BookingQueryRepository.CheckAvailabilityAsync(pickupDateTime, returnDateTime, carTypes,cancellationToken);
+        return await BookingQueryRepository.CheckCarTypeAvailability(pickupDateTime, returnDateTime, carTypes,cancellationToken);
+    }
+    
+    public async Task<IReadOnlyList<Car>> CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
+    {
+        return await BookingQueryRepository.CheckCarAvailability(pickupDateTime, returnDateTime, carTypes,cancellationToken);
     }
 }

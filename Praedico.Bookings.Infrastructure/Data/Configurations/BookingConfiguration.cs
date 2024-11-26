@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Praedico.Bookings.Domain;
 using Praedico.Bookings.Domain.Schedules;
+using Praedico.Bookings.Infrastructure.Data.Converters;
 using Serilog;
 
 namespace Praedico.Bookings.Infrastructure.Data.Configurations;
@@ -18,15 +18,8 @@ internal class BookingConfiguration : IEntityTypeConfiguration<Booking>
         
         builder.Property(x => x.BookingReference).IsRequired().HasMaxLength(50);
         builder.Property(x => x.PickupDateTime).HasColumnName("PickupDateTimeUtc").IsRequired();
-        builder.Property(x => x.ReturnDateTime).HasColumnName("ReturnDateTimeUtc").IsRequired();
-        
-        builder.Property(x => x.Status)
-            .HasConversion(
-                convertToProviderExpression: v => v.Name,
-                convertFromProviderExpression: v => Enumeration.FromName<BookingStatus>(v) 
-            )
-            .HasMaxLength(50);
-        
+        builder.Property(x => x.ReturnDateTime).HasColumnName("ReturnDateTimeUtc").IsRequired();        
+        builder.Property(x => x.Status).HasConversion(ValueConverters.EnumerationConverter<BookingStatus>()).IsRequired().HasMaxLength(50);        
         builder.Property(x => x.CreatedOn).HasColumnName("CreatedOnUtc").IsRequired().HasDefaultValueSql("GETUTCDATE()");
 
         builder.HasOne(x => x.Contact)

@@ -90,3 +90,319 @@ System.InvalidOperationException: Unable to resolve service for type 'Microsoft.
 2024-11-26 01:50:36.953 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
 2024-11-26 01:50:36.956 +11:00 [INF] Application started
 2024-11-26 01:50:55.756 +11:00 [INF] HTTP GET / responded 404 in 209.6717 ms
+2024-11-26 15:23:32.105 +11:00 [INF] Database path set to: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db
+2024-11-26 15:23:33.138 +11:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-11-26 15:23:35.151 +11:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2024-11-26 15:23:35.165 +11:00 [INF] warn: 26/11/2024 15:23:35.163 CoreEventId.SensitiveDataLoggingEnabledWarning[10400] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2024-11-26 15:23:35.239 +11:00 [DBG] The property 'Booking.CarId' was created in shadow state because there are no eligible CLR members with a matching name.
+2024-11-26 15:23:35.240 +11:00 [DBG] The property 'Booking.ContactId' was created in shadow state because there are no eligible CLR members with a matching name.
+2024-11-26 15:23:35.443 +11:00 [DBG] Entity Framework Core 9.0.0 initialized 'BookingsDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite:9.0.0' with options: SensitiveDataLoggingEnabled 
+2024-11-26 15:23:35.505 +11:00 [DBG] Creating DbConnection.
+2024-11-26 15:23:35.528 +11:00 [DBG] Created DbConnection. (19ms).
+2024-11-26 15:23:35.539 +11:00 [DBG] Opening connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:35.557 +11:00 [DBG] Opened connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:35.574 +11:00 [DBG] Disposing connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:35.585 +11:00 [DBG] Disposed connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db' (3ms).
+2024-11-26 15:23:35.593 +11:00 [DBG] Creating DbConnection.
+2024-11-26 15:23:35.594 +11:00 [DBG] Created DbConnection. (0ms).
+2024-11-26 15:23:35.600 +11:00 [DBG] Opening connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:35.607 +11:00 [DBG] Opened connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:35.654 +11:00 [INF] info: 26/11/2024 15:23:35.654 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (24ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2024-11-26 15:23:35.658 +11:00 [DBG] Closing connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:35.663 +11:00 [DBG] Closed connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db' (4ms).
+2024-11-26 15:23:35.744 +11:00 [DBG] Compiling query expression: 
+'DbSet<Car>()
+    .Any()'
+2024-11-26 15:23:36.111 +11:00 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<bool>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Cars AS c)) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Cars AS c), 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        bool? value1;
+        value1 = dataReader.IsDBNull(0) ? default(bool?) : (bool?)dataReader.GetBoolean(0);
+        return (bool)value1;
+    }, 
+    contextType: Praedico.Bookings.Infrastructure.Data.BookingsDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)
+    .Single()'
+2024-11-26 15:23:36.156 +11:00 [DBG] Opening connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.158 +11:00 [DBG] Opened connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.161 +11:00 [INF] info: 26/11/2024 15:23:36.161 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1
+          FROM "Cars" AS "c")
+2024-11-26 15:23:36.174 +11:00 [DBG] Closing connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.175 +11:00 [DBG] Closed connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db' (1ms).
+2024-11-26 15:23:36.178 +11:00 [DBG] Compiling query expression: 
+'DbSet<Contact>()
+    .Any()'
+2024-11-26 15:23:36.183 +11:00 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<bool>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Contacts AS c)) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Contacts AS c), 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        bool? value1;
+        value1 = dataReader.IsDBNull(0) ? default(bool?) : (bool?)dataReader.GetBoolean(0);
+        return (bool)value1;
+    }, 
+    contextType: Praedico.Bookings.Infrastructure.Data.BookingsDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)
+    .Single()'
+2024-11-26 15:23:36.186 +11:00 [DBG] Opening connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.188 +11:00 [DBG] Opened connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.190 +11:00 [INF] info: 26/11/2024 15:23:36.190 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1
+          FROM "Contacts" AS "c")
+2024-11-26 15:23:36.192 +11:00 [DBG] Closing connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.193 +11:00 [DBG] Closed connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db' (1ms).
+2024-11-26 15:23:36.196 +11:00 [DBG] Compiling query expression: 
+'DbSet<Schedule>()
+    .Any()'
+2024-11-26 15:23:36.200 +11:00 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<bool>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Schedules AS s)) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Schedules AS s), 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        bool? value1;
+        value1 = dataReader.IsDBNull(0) ? default(bool?) : (bool?)dataReader.GetBoolean(0);
+        return (bool)value1;
+    }, 
+    contextType: Praedico.Bookings.Infrastructure.Data.BookingsDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)
+    .Single()'
+2024-11-26 15:23:36.205 +11:00 [DBG] Opening connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.207 +11:00 [DBG] Opened connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.209 +11:00 [INF] info: 26/11/2024 15:23:36.209 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1
+          FROM "Schedules" AS "s")
+2024-11-26 15:23:36.210 +11:00 [DBG] Closing connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.212 +11:00 [DBG] Closed connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db' (1ms).
+2024-11-26 15:23:36.216 +11:00 [DBG] Compiling query expression: 
+'DbSet<Booking>()
+    .Any()'
+2024-11-26 15:23:36.220 +11:00 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<bool>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Bookings AS b)) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Bookings AS b), 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        bool? value1;
+        value1 = dataReader.IsDBNull(0) ? default(bool?) : (bool?)dataReader.GetBoolean(0);
+        return (bool)value1;
+    }, 
+    contextType: Praedico.Bookings.Infrastructure.Data.BookingsDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)
+    .Single()'
+2024-11-26 15:23:36.224 +11:00 [DBG] Opening connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.225 +11:00 [DBG] Opened connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.227 +11:00 [INF] info: 26/11/2024 15:23:36.227 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1
+          FROM "Bookings" AS "b")
+2024-11-26 15:23:36.228 +11:00 [DBG] Closing connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.230 +11:00 [DBG] Closed connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db' (1ms).
+2024-11-26 15:23:36.238 +11:00 [DBG] 'BookingsDbContext' disposed.
+2024-11-26 15:23:36.240 +11:00 [DBG] Disposing connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db'.
+2024-11-26 15:23:36.241 +11:00 [DBG] Disposed connection to database 'main' on server 'E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\bin\Debug\net9.0\.db\Bookings.db' (1ms).
+2024-11-26 15:23:36.701 +11:00 [INF] Now listening on: http://localhost:5270
+2024-11-26 15:23:36.705 +11:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-26 15:23:36.707 +11:00 [INF] Hosting environment: Development
+2024-11-26 15:23:36.709 +11:00 [INF] Content root path: E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api
+2024-11-26 15:23:36.710 +11:00 [INF] Application started
+2024-11-26 15:23:38.476 +11:00 [DBG] Entity Framework Core 9.0.0 initialized 'BookingsDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite:9.0.0' with options: SensitiveDataLoggingEnabled 
+2024-11-26 15:23:38.548 +11:00 [DBG] Compiling query expression: 
+'DbSet<Booking>()
+    .Include(x => x.Contact)
+    .Include(x => x.Car)
+    .Where(x => x.Car.IsActive)
+    .Where(x => __carTypesList_0.Contains(x.Car.CarType.Name))
+    .Where(x => !(x.PickupDateTime <= __pickupDateTime_1 && x.ReturnDateTime >= __returnDateTime_2) && !(x.PickupDateTime <= __pickupDateTime_1 && x.ReturnDateTime > __pickupDateTime_1 && x.ReturnDateTime <= __returnDateTime_2) && !(x.PickupDateTime >= __pickupDateTime_1 && x.PickupDateTime < __returnDateTime_2 && x.ReturnDateTime >= __returnDateTime_2) && !(x.PickupDateTime >= __pickupDateTime_1 && x.ReturnDateTime <= __returnDateTime_2))
+    .Select(x => x.Car)
+    .Distinct()'
+2024-11-26 15:23:39.308 +11:00 [INF] HTTP GET / responded 200 in 14.2295 ms
+2024-11-26 15:23:39.308 +11:00 [ERR] HTTP GET /api/bookings/cars/availability responded 500 in 1134.9957 ms
+System.InvalidOperationException: The LINQ expression '__carTypesList_0
+    .Contains(StructuralTypeShaperExpression(
+        StructuralType: Praedico.Bookings.Domain.Cars.Car
+        ValueBufferExpression: ProjectionBindingExpression: Inner
+        IsNullable: False).CarType.Name)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.TranslateSubquery(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.<VisitMethodCall>g__TranslateAsSubquery|33_0(Expression expression, <>c__DisplayClass33_0&)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Sqlite.Query.Internal.SqliteSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.TranslateInternal(Expression expression, Boolean applyDefaultTypeMapping)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.Translate(Expression expression, Boolean applyDefaultTypeMapping)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.TranslateExpression(Expression expression, Boolean applyDefaultTypeMapping)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.TranslateLambdaExpression(ShapedQueryExpression shapedQueryExpression, LambdaExpression lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteCore[TResult](Expression query, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider.ExecuteAsync[TResult](Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryable`1.GetAsyncEnumerator(CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable`1.GetAsyncEnumerator()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Praedico.Bookings.Infrastructure.Repositories.BookingQueryRepository.CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, String[] carTypes, CancellationToken cancellationToken) in E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Infrastructure\Repositories\BookingQueryRepository.cs:line 57
+   at Praedico.Bookings.Application.Bookings.BookingQueryHandler.CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, String[] carTypes, CancellationToken cancellationToken) in E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Application\Bookings\BookingQueryHandler.cs:line 39
+   at Praedico.Bookings.Api.Bookings.BookingApiQueryHandler.CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, String[] carTypes, CancellationToken cancellationToken) in E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\Bookings\BookingApiQueryHandler.cs:line 35
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2024-11-26 15:23:39.558 +11:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The LINQ expression '__carTypesList_0
+    .Contains(StructuralTypeShaperExpression(
+        StructuralType: Praedico.Bookings.Domain.Cars.Car
+        ValueBufferExpression: ProjectionBindingExpression: Inner
+        IsNullable: False).CarType.Name)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.TranslateSubquery(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.<VisitMethodCall>g__TranslateAsSubquery|33_0(Expression expression, <>c__DisplayClass33_0&)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Sqlite.Query.Internal.SqliteSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.TranslateInternal(Expression expression, Boolean applyDefaultTypeMapping)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.Translate(Expression expression, Boolean applyDefaultTypeMapping)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.TranslateExpression(Expression expression, Boolean applyDefaultTypeMapping)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.TranslateLambdaExpression(ShapedQueryExpression shapedQueryExpression, LambdaExpression lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteCore[TResult](Expression query, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider.ExecuteAsync[TResult](Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryable`1.GetAsyncEnumerator(CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable`1.GetAsyncEnumerator()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Praedico.Bookings.Infrastructure.Repositories.BookingQueryRepository.CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, String[] carTypes, CancellationToken cancellationToken) in E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Infrastructure\Repositories\BookingQueryRepository.cs:line 57
+   at Praedico.Bookings.Application.Bookings.BookingQueryHandler.CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, String[] carTypes, CancellationToken cancellationToken) in E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Application\Bookings\BookingQueryHandler.cs:line 39
+   at Praedico.Bookings.Api.Bookings.BookingApiQueryHandler.CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, String[] carTypes, CancellationToken cancellationToken) in E:\Steve McCormack\Workspaces\GitHub\Praedico\Praedico.Bookings.Api\Bookings\BookingApiQueryHandler.cs:line 35
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-11-26 15:23:39.592 +11:00 [DBG] 'BookingsDbContext' disposed.

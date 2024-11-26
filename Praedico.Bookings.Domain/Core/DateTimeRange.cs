@@ -1,4 +1,5 @@
-﻿using Praedico.Guards;
+﻿using System.Linq.Expressions;
+using Praedico.Guards;
 
 namespace Praedico.Bookings.Domain;
 
@@ -82,4 +83,26 @@ public class DateTimeRange : IEquatable<DateTimeRange>, IComparable<DateTimeRang
     }
 
     public override string ToString() => $"{Start:O} - {End:O}";
+}
+
+public static class DateTimeRangeExtensions
+{
+    public static Expression<Func<DateTimeRange, bool>> Overlaps(this DateTimeRange other)
+    {
+        return x => x.Start < other.End && x.End > other.Start;
+    }
+    
+    public static Expression<Func<DateTimeRange, bool>> Contains(this DateTimeRange other)
+    {
+        return x => x.Start <= other.Start && x.End >= other.End;
+    }
+    
+    public static Expression<Func<DateTimeRange, bool>> Collides(this DateTimeRange other)
+    {
+        return x =>
+            x.Start <= other.Start && x.End >= other.End || // StartsBeforeAndEndsAfter
+            x.Start <= other.Start && x.End > other.Start && x.End <= other.End || // StartsBeforeAndEndsDuring
+            x.Start >= other.Start && x.Start < other.End && x.End >= other.End || // StartsDuringAndEndsAfter
+            x.Start >= other.Start && x.End <= other.End; // IsWithin
+    }
 }

@@ -1,6 +1,6 @@
-﻿using Praedico.Bookings.Domain.Schedules;
-using Praedico.Bookings.Domain.Cars;
-using Praedico.Bookings.Domain.Contacts;
+﻿using Praedico.Bookings.Api.Cars;
+using Praedico.Bookings.Api.Contacts;
+using Praedico.Bookings.Domain.Schedules;
 
 namespace Praedico.Bookings.Api.Bookings;
 
@@ -25,31 +25,6 @@ public static class BookingResponseMaps
             CreatedOn = booking.CreatedOn,
             Contact = booking.Contact.ToResponse(),
             Car = booking.Car.ToResponse()
-        };
-    }
-
-    public static ContactResponse ToResponse(this Contact contact)
-    {
-        return new ContactResponse
-        {
-            //ContactId // dont leak domain
-            LicenseNumber = contact.LicenseNumber,
-            GivenName = contact.GivenName,
-            Surname = contact.Surname,
-            Email = contact.Email,
-            Phone = contact.Phone,
-            IsActive = contact.IsActive
-        };
-    }
-
-    public static CarResponse ToResponse(this Car car)
-    {
-        return new CarResponse
-        {
-            //CarId // dont leak domain
-            RegistrationNumber = car.RegistrationNumber,
-            CarType = car.CarType.Name,
-            HireStatus = car.Status.Name
         };
     }
 }

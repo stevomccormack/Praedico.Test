@@ -6,23 +6,22 @@ public class Car: Entity
 {
     public string RegistrationNumber { get; private set; } //unique
     public CarType CarType { get; private set; }
-    public CarHireStatus Status { get; private set; }
+    public CarStatus Status { get; private set; } = CarStatus.Available;
     public bool IsActive { get; private set; } = true;
 
-    private Car(Guid id, CarType carType, string registrationNumber): base(id)
+    private Car(Guid id, string registrationNumber, CarType carType): base(id)
     {
-        CarType = carType;
         RegistrationNumber = registrationNumber;
-        Status = CarHireStatus.Available;
+        CarType = carType;
     }
 
-    public static Car Create(CarType carType, string registrationNumber)
+    public static Car Create(string registrationNumber, CarType carType)
     {
-        Guard.Against.Null(carType, nameof(carType));
         Guard.Against.NullOrWhiteSpace(registrationNumber, nameof(registrationNumber));
         Guard.Against.InvalidRegistrationNumber(registrationNumber);
+        Guard.Against.Null(carType, nameof(carType));
 
-        return new Car(Guid.NewGuid(), carType, registrationNumber);
+        return new Car(Guid.NewGuid(), registrationNumber, carType);
     }
 
     public void ChangeCarType(CarType carType)
@@ -42,20 +41,15 @@ public class Car: Entity
 
     public void Available()
     {
-        ChangeStatus(CarHireStatus.Available);
+        ChangeStatus(CarStatus.Available);
     }
-
-    public void Hired()
-    {
-        ChangeStatus(CarHireStatus.Hired);
-    } 
 
     public void Unavailable()
     {
-        ChangeStatus(CarHireStatus.Unavailable);
+        ChangeStatus(CarStatus.Unavailable);
     }
 
-    private void ChangeStatus(CarHireStatus status)
+    private void ChangeStatus(CarStatus status)
     {
         if (!status.Equals(Status))
             Status = status;

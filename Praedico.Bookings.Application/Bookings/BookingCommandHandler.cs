@@ -38,7 +38,7 @@ public class BookingCommandHandler(
         else
         {
             var carType = Enumeration.FromName<CarType>(request.CarType);
-            car = Car.Create(carType, request.CarRegistrationNumber);
+            car = Car.Create(request.CarRegistrationNumber, carType);
         }
 
         var booking = Booking.Create(contact, car, request.PickupDateTime, request.ReturnDateTime);

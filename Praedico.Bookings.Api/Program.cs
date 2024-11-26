@@ -1,5 +1,4 @@
 using Praedico.Bookings.Api.Extensions;
-using Praedico.Bookings.Infrastructure.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.UseSerilog();

@@ -11,12 +11,16 @@ GET {{Api_HostAddress}}/api/bookings/{bookingReference}
 Accept: application/json
 
 ### Example
-GET {{Api_HostAddress}}/api/bookings/BK-12345
+GET {{Api_HostAddress}}/api/bookings/BK-23EBF052BA2E1
 Accept: application/json
 
 
 # Check Booking Availability
 GET {{Api_HostAddress}}/api/bookings/availability
+Accept: application/json
+
+### Query Parameters Example
+GET {{Api_HostAddress}}/api/bookings/availability?pickupDateTime=2024-12-01T10:00:00Z&returnDateTime=2024-12-10T10:00:00Z
 Accept: application/json
 
 ### Query Parameters Example

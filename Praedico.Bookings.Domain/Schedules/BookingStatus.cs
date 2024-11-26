@@ -8,9 +8,9 @@ public class BookingStatus : Enumeration
     public static readonly BookingStatus Cancelled = new("Cancelled");
     public static readonly BookingStatus Abandoned = new("Abandoned");
 
-    public static IReadOnlyList<BookingStatus> All => new[] { Placed, Confirmed, Completed, Cancelled, Abandoned };
-    public static IReadOnlyList<BookingStatus> ActiveStates => new[] { Placed, Confirmed };
-    public static IReadOnlyList<BookingStatus> TerminalStates => new[] { Completed, Cancelled, Abandoned };
+    public static IReadOnlyList<BookingStatus> All => [Placed, Confirmed, Completed, Cancelled, Abandoned];
+    public static IReadOnlyList<BookingStatus> ActiveStates => [Placed, Confirmed];
+    public static IReadOnlyList<BookingStatus> TerminalStates => [Completed, Cancelled, Abandoned];
 
     private BookingStatus(string name) : base(name) { }
 }

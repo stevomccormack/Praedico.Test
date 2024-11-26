@@ -8,7 +8,7 @@ public class Schedule: AggregateRoot
     public string LocationCode { get; }
     public DateTime CreatedOn { get; } = DateTime.UtcNow;
 
-    private readonly List<Booking> _bookings = new();
+    private readonly List<Booking> _bookings = [];
     public IReadOnlyList<Booking> Bookings => _bookings.AsReadOnly();
 
     private Schedule(Guid id, string locationCode) : base(id)

@@ -7,7 +7,7 @@ public abstract class Entity : IEntity, IEquatable<Entity>
 {
     public Guid Id { get; }
     
-    private readonly List<object> _domainEvents = new();
+    private readonly List<object> _domainEvents = [];
 
     protected Entity(Guid id)
     {

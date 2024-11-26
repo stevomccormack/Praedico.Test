@@ -27,7 +27,7 @@ public class CommandRepository<TEntity>(BookingsDbContext dbContext) : ICommandR
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var entity = await DbSet.FindAsync(new object[] { id }, cancellationToken);
+        var entity = await DbSet.FindAsync([id], cancellationToken);
         if (entity == null) throw new KeyNotFoundException($"Entity with ID {id} not found.");
         DbSet.Remove(entity);
         await DbContext.SaveChangesAsync(cancellationToken);

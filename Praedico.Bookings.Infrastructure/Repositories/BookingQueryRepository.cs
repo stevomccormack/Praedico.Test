@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Praedico.Bookings.Application.Bookings;
-using Praedico.Bookings.Domain;
 using Praedico.Bookings.Domain.Cars;
 using Praedico.Bookings.Domain.Schedules;
 using Praedico.Bookings.Infrastructure.Data;
@@ -13,8 +12,8 @@ public class BookingQueryRepository : QueryRepository<Booking>, IBookingQueryRep
     public BookingQueryRepository(BookingsDbContext dbContext) : base(dbContext)
     {
         Query = Query
-            .Include(b => b.Contact)
-            .Include(b => b.Car);
+            .Include(x => x.Contact)
+            .Include(x => x.Car);
     }
 
     public async Task<Booking?> GetUniqueAsync(string bookingReference, CancellationToken cancellationToken = default)
@@ -33,34 +32,32 @@ public class BookingQueryRepository : QueryRepository<Booking>, IBookingQueryRep
             cancellationToken: cancellationToken);
     }
 
-    public async Task<bool> CheckAvailabilityAsync(
+    public async Task<IReadOnlyList<CarType>> CheckCarTypeAvailability(
         DateTime pickupDateTime,
         DateTime returnDateTime,
         string[]? carTypes,
         CancellationToken cancellationToken = default)
     {
-        var timeRange = DateTimeRange.Create(pickupDateTime, returnDateTime);
-        var availableStatus = CarHireStatus.Available.Name;
-        var considerAllCarTypes = carTypes == null || carTypes.Length == 0;        
-        
-        // Check availability
-        if (considerAllCarTypes)
-        {
-            return await Query.AnyAsync(
-                x =>
-                    !x.TimeRange.Overlaps(timeRange) && // Ensure no time overlap
-                    x.Car.Status.Name == availableStatus && // Car must be available
-                    x.Car.IsActive, // Car must be active
-                cancellationToken);
-        }
+        var query = Query.AvailableCars(pickupDateTime, returnDateTime, carTypes);
 
-        return await Query.AnyAsync(
-            x =>
-                !x.TimeRange.Overlaps(timeRange) && // Ensure no time overlap
-                x.Car.Status.Name == availableStatus && // Car must be available
-                carTypes!.Contains(x.Car.CarType.Name) && // Match car types
-                x.Car.IsActive, // Car must be active
-            cancellationToken);
+        return await query
+            .Select(x => x.Car.CarType)
+            .Distinct()
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<IReadOnlyList<Car>> CheckCarAvailability(
+        DateTime pickupDateTime,
+        DateTime returnDateTime,
+        string[]? carTypes,
+        CancellationToken cancellationToken = default)
+    {
+        var query = Query.AvailableCars(pickupDateTime, returnDateTime, carTypes);
+
+        return await query
+            .Select(x => x.Car)
+            .Distinct()
+            .ToListAsync(cancellationToken);
     }
 
     public new async Task<IEnumerable<Booking>> SearchAsync(

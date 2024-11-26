@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
-using Praedico.Bookings.Domain.Cars;
+﻿using Praedico.Bookings.Domain.Cars;
 using Praedico.Bookings.Domain.Contacts;
 using Praedico.Bookings.Domain.Schedules;
 using Serilog;
@@ -92,12 +90,12 @@ namespace Praedico.Bookings.Infrastructure.Data
         {
             Cars =
             [
-                Car.Create(CarType.Compact, "SPIDERMAN"),
-                Car.Create(CarType.Compact, "IRONMAN"),
-                Car.Create(CarType.Van, "HULK"),
-                Car.Create(CarType.SUV, "SUPERMAN"),
-                Car.Create(CarType.Compact, "BATMOBILE"),
-                Car.Create(CarType.Compact, "LEXCORP")
+                Car.Create("SPIDERMAN", CarType.Compact),
+                Car.Create("IRONMAN", CarType.Compact),
+                Car.Create("HULK", CarType.Van),
+                Car.Create("SUPERMAN", CarType.SUV),
+                Car.Create("BATMOBILE", CarType.Compact),
+                Car.Create("LEXCORP", CarType.Compact)
             ];
         }
 
