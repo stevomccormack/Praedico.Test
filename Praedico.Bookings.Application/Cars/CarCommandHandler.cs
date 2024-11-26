@@ -1,5 +1,4 @@
-﻿using Praedico.Bookings.Domain;
-using Praedico.Bookings.Domain.Cars;
+﻿using Praedico.Bookings.Domain.Cars;
 
 namespace Praedico.Bookings.Application.Cars;
 
@@ -9,7 +8,7 @@ public class CarCommandHandler(ICarCommandRepository carCommandRepository)
 
     public async Task<Car> CreateCar(CreateCarRequest request, CancellationToken cancellationToken = default)
     {
-        var carType = Enumeration.FromName<CarType>(request.CarType);
+        var carType = CarType.FromName(request.CarType);
         var car = Car.Create(request.CarRegistrationNumber, carType);
         
         return await CarCommandRepository.CreateAsync(car, cancellationToken: cancellationToken);

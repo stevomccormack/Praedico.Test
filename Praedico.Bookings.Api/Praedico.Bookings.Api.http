@@ -15,15 +15,15 @@ GET {{Api_HostAddress}}/api/bookings/BK-23EBF052BA2E1
 Accept: application/json
 
 
-# Check Booking Availability
-GET {{Api_HostAddress}}/api/bookings/availability
+# Check Car Types Availability
+GET {{Api_HostAddress}}/api/bookings/availability/cartypes
 Accept: application/json
 
-### Query Parameters Example
+### Availability for any car type (no car types specified)
 GET {{Api_HostAddress}}/api/bookings/availability?pickupDateTime=2024-12-01T10:00:00Z&returnDateTime=2024-12-10T10:00:00Z
 Accept: application/json
 
-### Query Parameters Example
+### Availability for specified car types
 GET {{Api_HostAddress}}/api/bookings/availability?pickupDateTime=2024-12-01T10:00:00Z&returnDateTime=2024-12-10T10:00:00Z&carTypes=Compact,SUV
 Accept: application/json
 

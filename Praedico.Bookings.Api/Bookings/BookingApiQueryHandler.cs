@@ -24,13 +24,13 @@ public class BookingApiQueryHandler(BookingQueryHandler bookingQueryHandler)
             : Results.Ok(booking.ToResponse());
     }
     
-    public async Task<IResult> CheckCarTypeAvailability([FromQuery]DateTime pickupDateTime, [FromQuery]DateTime returnDateTime, [FromQuery]string[]? carTypes, CancellationToken cancellationToken = default)
+    public async Task<IResult> CheckCarTypeAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
     {
         var availableCarTypes = await BookingQueryHandler.CheckCarTypeAvailability(pickupDateTime, returnDateTime, carTypes,cancellationToken);
         return Results.Ok(availableCarTypes);
     }
     
-    public async Task<IResult> CheckCarAvailability([FromQuery]DateTime pickupDateTime, [FromQuery]DateTime returnDateTime, [FromQuery]string[]? carTypes, CancellationToken cancellationToken = default)
+    public async Task<IResult> CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
     {
         var availableCars = await BookingQueryHandler.CheckCarAvailability(pickupDateTime, returnDateTime, carTypes,cancellationToken);
         var result = availableCars.ToResponse();
