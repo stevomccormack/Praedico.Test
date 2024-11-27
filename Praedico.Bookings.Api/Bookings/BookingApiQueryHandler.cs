@@ -28,6 +28,9 @@ public class BookingApiQueryHandler(BookingQueryHandler bookingQueryHandler)
     public async Task<IResult> CheckCarTypeAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
     {
         var availableCarTypes = await BookingQueryHandler.CheckCarTypeAvailability(pickupDateTime, returnDateTime, carTypes.ToCarTypeArray(),cancellationToken);
+        if (!availableCarTypes.Any())
+            return Results.NotFound($"No car types: {string.Join(", ", carTypes ?? [])} available between pickup: {pickupDateTime:yy-MMM-dd ddd hh:mm} and return: {returnDateTime:yy-MMM-dd ddd hh:mm} dates.");
+       
         var result = availableCarTypes.Select(x => new
         {
             CarType = x.ToString(),
@@ -38,6 +41,9 @@ public class BookingApiQueryHandler(BookingQueryHandler bookingQueryHandler)
     public async Task<IResult> CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
     {
         var availableCars = await BookingQueryHandler.CheckCarAvailability(pickupDateTime, returnDateTime, carTypes.ToCarTypeArray(),cancellationToken);
+        if (!availableCars.Any())
+            return Results.NotFound($"No cars available for car types: {string.Join(", ", carTypes ?? [])} between pickup: {pickupDateTime:yy-MMM-dd ddd hh:mm} and return: {returnDateTime:yy-MMM-dd ddd hh:mm} dates.");
+
         var result = availableCars.ToListResponse();
         return Results.Ok(result);
     }

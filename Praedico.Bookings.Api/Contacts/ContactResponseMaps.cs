@@ -4,7 +4,7 @@ namespace Praedico.Bookings.Api.Contacts;
 
 public static class ContactResponseMaps
 {
-    public static IReadOnlyList<ContactResponse> ToResponse(this IReadOnlyList<Contact> contacts)
+    public static IReadOnlyList<ContactResponse> ToListResponse(this IReadOnlyList<Contact> contacts)
     {
         return contacts.Select(x => x.ToResponse()).ToList().AsReadOnly();
     }

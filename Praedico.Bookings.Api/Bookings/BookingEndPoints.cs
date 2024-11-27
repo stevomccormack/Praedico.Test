@@ -6,43 +6,44 @@ public static class BookingEndpoints
 {
     public static void UseBookingEndpoints(this WebApplication app)
     {
-        app.MapBookingCommandEndpoints();
-        app.MapBookingQueryEndpoints();
+        var apiGroup = app.MapGroup("/api/bookings").WithTags("Bookings");
+        app.MapBookingCommandEndpoints(apiGroup);
+        app.MapBookingQueryEndpoints(apiGroup);
     }
 
-    private static void MapBookingQueryEndpoints(this WebApplication app)
+    private static void MapBookingQueryEndpoints(this WebApplication app, RouteGroupBuilder apiGroup)
     {
         // rest
-        app.MapGet("/api/bookings", (BookingApiQueryHandler handler, CancellationToken cancellationToken) => 
-                handler.GetAllBookings(cancellationToken))
-            .WithName("GetAllBookings");
+        apiGroup.MapGet("/", (BookingApiQueryHandler handler, CancellationToken cancellationToken) => 
+                    handler.GetAllBookings(cancellationToken))
+                .WithName("GetAllBookings");
 
-        app.MapGet("/api/bookings/{bookingReference}", (BookingApiQueryHandler handler, string bookingReference, CancellationToken cancellationToken) => 
+        apiGroup.MapGet("/{bookingReference}", (BookingApiQueryHandler handler, string bookingReference, CancellationToken cancellationToken) => 
                 handler.GetBookingByReference(bookingReference, cancellationToken))
             .WithName("GetBookingByReference");
         
         // custom
-        app.MapGet("/api/bookings/cartypes/availability", (BookingApiQueryHandler handler, DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken) => 
+        apiGroup.MapGet("/cartypes/availability", (BookingApiQueryHandler handler, DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken) => 
                 handler.CheckCarTypeAvailability(pickupDateTime, returnDateTime, carTypes, cancellationToken))
             .WithName("CheckCarTypeAvailability");
         
-        app.MapGet("/api/bookings/cars/availability", (BookingApiQueryHandler handler, DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken) => 
+        apiGroup.MapGet("/cars/availability", (BookingApiQueryHandler handler, DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken) => 
                 handler.CheckCarAvailability(pickupDateTime, returnDateTime, carTypes, cancellationToken))
             .WithName("CheckCarAvailability");
     }
 
-    private static void MapBookingCommandEndpoints(this WebApplication app)
+    private static void MapBookingCommandEndpoints(this WebApplication app, RouteGroupBuilder apiGroup)
     {
         // rest
-        app.MapPost("/api/bookings", (BookingApiCommandHandler handler, CreateBookingRequest request, CancellationToken cancellationToken) => 
+        apiGroup.MapPost("/", (BookingApiCommandHandler handler, BookingRequest request, CancellationToken cancellationToken) => 
                 handler.CreateBooking(request, cancellationToken))
             .WithName("CreateBooking");
 
-        app.MapPut("/api/bookings/{bookingReference}", (BookingApiCommandHandler handler, string bookingReference, CreateBookingRequest request, CancellationToken cancellationToken) => 
+        apiGroup.MapPut("/{bookingReference}", (BookingApiCommandHandler handler, string bookingReference, BookingRequest request, CancellationToken cancellationToken) => 
                 handler.UpdateBooking(bookingReference, request, cancellationToken))
             .WithName("UpdateBooking");
 
-        app.MapDelete("/api/bookings/{bookingReference}", (BookingApiCommandHandler handler, string bookingReference, CancellationToken cancellationToken) => 
+        apiGroup.MapDelete("/{bookingReference}", (BookingApiCommandHandler handler, string bookingReference, CancellationToken cancellationToken) => 
                 handler.DeleteBooking(bookingReference, cancellationToken))
             .WithName("DeleteBooking");
     }

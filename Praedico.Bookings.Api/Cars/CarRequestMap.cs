@@ -5,7 +5,7 @@ namespace Praedico.Bookings.Api.Contacts;
 
 public static class CarRequestMap
 {
-    public static Car ToDomain(this CreateCarRequest request)
+    public static Car ToDomain(this CarRequest request)
     {
         var carType = request.CarType;
         var car = Car.Create(request.CarRegistrationNumber, carType);
