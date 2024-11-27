@@ -6,7 +6,7 @@ namespace Praedico.Bookings.Api.Bookings;
 
 public static class BookingResponseMaps
 {
-    public static IReadOnlyList<BookingResponse> ToResponse(this IReadOnlyList<Booking> bookings)
+    public static IReadOnlyList<BookingResponse> ToListResponse(this IReadOnlyList<Booking> bookings)
     {
         return bookings.Select(x => x.ToResponse()).ToList().AsReadOnly();
     }
@@ -19,7 +19,7 @@ public static class BookingResponseMaps
             BookingReference = booking.BookingReference,
             PickupDateTime = booking.TimeRange.Start,
             ReturnDateTime = booking.TimeRange.End,
-            BookingStatus = booking.Status.Name,
+            BookingStatus = booking.Status.ToString(),
             StatusChangedOn = booking.StatusChangedOn,
             LastModifiedOn = booking.LastModifiedOn,
             CreatedOn = booking.CreatedOn,

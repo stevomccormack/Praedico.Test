@@ -4,9 +4,9 @@ namespace Praedico.Bookings.Api.Cars;
 
 public static class CarResponseMaps
 {
-    public static IReadOnlyList<CarResponse> ToResponse(this IReadOnlyList<Car> cars)
+    public static IReadOnlyList<CarResponse> ToListResponse(this IReadOnlyList<Car> cars)
     {
-        return cars.Select(x => x.ToResponse()).ToList().AsReadOnly();
+        return cars.Select(x => x.ToResponse()).ToList();
     }
 
     public static CarResponse ToResponse(this Car car)
@@ -15,8 +15,8 @@ public static class CarResponseMaps
         {
             //CarId // dont leak domain
             RegistrationNumber = car.RegistrationNumber,
-            CarType = car.CarType.Name,
-            HireStatus = car.Status.Name
+            CarType = car.CarType.ToString(),
+            CarStatus = car.Status.ToString()
         };
     }
 }

@@ -10,6 +10,6 @@ public interface IBookingQueryRepository : IQueryRepository<Booking>
 
     Task<bool> ExistsUniqueAsync(string bookingReference, CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyList<CarType>> CheckCarTypeAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default);
-    Task<IReadOnlyList<Car>> CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<CarType>> CheckCarTypeAvailability(DateTime pickupDateTime, DateTime returnDateTime, CarType[]? carTypes, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<Car>> CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, CarType[]? carTypes, CancellationToken cancellationToken = default);
 }

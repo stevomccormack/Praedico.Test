@@ -1,3 +1,5 @@
+using Praedico.Bookings.Domain.Cars;
+
 namespace Praedico.Bookings.Application.Bookings;
 
 public record CreateBookingRequest
@@ -10,5 +12,5 @@ public record CreateBookingRequest
     public string ContactSurname { get; init; } = string.Empty;
     
     public string CarRegistrationNumber { get; init; } = string.Empty;
-    public string CarType { get; init; } = string.Empty;
+    public CarType CarType { get; init; } = CarType.Compact;
 }

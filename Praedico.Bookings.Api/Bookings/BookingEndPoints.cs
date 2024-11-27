@@ -43,7 +43,8 @@ public static class BookingEndpoints
             .WithName("UpdateBooking");
 
         app.MapDelete("/api/bookings/{bookingReference}", (BookingApiCommandHandler handler, string bookingReference, CancellationToken cancellationToken) => 
-                handler.DeleteBooking(bookingReference, cancellationToken))
+                handler.DeleteBooking(bookingReference, cancel
+                lationToken))
             .WithName("DeleteBooking");
     }
 }

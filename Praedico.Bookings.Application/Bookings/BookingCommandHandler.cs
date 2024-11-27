@@ -23,13 +23,13 @@ public class BookingCommandHandler(
         var availableCarTypes = await BookingQueryRepository.CheckCarTypeAvailability(request.PickupDateTime, request.ReturnDateTime,
             [request.CarType]
             , cancellationToken);
-        if (availableCarTypes.All(x => x.Name != request.CarType))
+        if (!availableCarTypes.Contains(request.CarType))
             throw new NotFoundException($"Booking unavailable for {request.CarType}.");
 
         var availableCars = await BookingQueryRepository.CheckCarTypeAvailability(request.PickupDateTime, request.ReturnDateTime,
             [request.CarType]
             , cancellationToken);
-        if (availableCars.All(x => x.Name != request.CarType))
+        if (!availableCars.Contains(request.CarType))
             throw new NotFoundException($"Booking unavailable for {request.CarType}.");
         
         // check car

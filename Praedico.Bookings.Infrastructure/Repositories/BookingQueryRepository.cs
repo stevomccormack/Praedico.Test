@@ -35,7 +35,7 @@ public class BookingQueryRepository : QueryRepository<Booking>, IBookingQueryRep
     public async Task<IReadOnlyList<CarType>> CheckCarTypeAvailability(
         DateTime pickupDateTime,
         DateTime returnDateTime,
-        string[]? carTypes,
+        CarType[]? carTypes,
         CancellationToken cancellationToken = default)
     {
         var query = Query.AvailableCars(pickupDateTime, returnDateTime, carTypes);
@@ -49,7 +49,7 @@ public class BookingQueryRepository : QueryRepository<Booking>, IBookingQueryRep
     public async Task<IReadOnlyList<Car>> CheckCarAvailability(
         DateTime pickupDateTime,
         DateTime returnDateTime,
-        string[]? carTypes,
+        CarType[]? carTypes,
         CancellationToken cancellationToken = default)
     {
         var query = Query.AvailableCars(pickupDateTime, returnDateTime, carTypes);

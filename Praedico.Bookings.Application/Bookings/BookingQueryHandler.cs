@@ -29,12 +29,12 @@ public class BookingQueryHandler(IBookingQueryRepository bookingQueryRepository)
         return await BookingQueryRepository.ExistsUniqueAsync(bookingReference, cancellationToken: cancellationToken);
     }
     
-    public async Task<IReadOnlyList<CarType>> CheckCarTypeAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<CarType>> CheckCarTypeAvailability(DateTime pickupDateTime, DateTime returnDateTime, CarType[]? carTypes, CancellationToken cancellationToken = default)
     {
         return await BookingQueryRepository.CheckCarTypeAvailability(pickupDateTime, returnDateTime, carTypes,cancellationToken);
     }
     
-    public async Task<IReadOnlyList<Car>> CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<Car>> CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, CarType[]? carTypes, CancellationToken cancellationToken = default)
     {
         return await BookingQueryRepository.CheckCarAvailability(pickupDateTime, returnDateTime, carTypes,cancellationToken);
     }

@@ -8,8 +8,7 @@ public class CarCommandHandler(ICarCommandRepository carCommandRepository)
 
     public async Task<Car> CreateCar(CreateCarRequest request, CancellationToken cancellationToken = default)
     {
-        var carType = CarType.FromName(request.CarType);
-        var car = Car.Create(request.CarRegistrationNumber, carType);
+        var car = Car.Create(request.CarRegistrationNumber, request.CarType);
         
         return await CarCommandRepository.CreateAsync(car, cancellationToken: cancellationToken);
     }

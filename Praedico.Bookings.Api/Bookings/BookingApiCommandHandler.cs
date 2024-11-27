@@ -1,6 +1,4 @@
 ﻿using Praedico.Bookings.Application.Bookings;
-using Praedico.Bookings.Application.Cars;
-using Praedico.Bookings.Application.Contacts;
 
 //Mediator - typically use for CQRS handling
 

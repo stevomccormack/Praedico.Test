@@ -5,14 +5,13 @@ namespace Praedico.Bookings.Domain.Cars;
 public class Car: Entity
 {
     public string RegistrationNumber { get; private set; } //unique
-    public CarType CarType { get; private set; }
+    public CarType CarType { get; private set; } = CarType.Compact;
     public CarStatus Status { get; private set; } = CarStatus.Available;
     public bool IsActive { get; private set; } = true;
 
-    private Car(Guid id, string registrationNumber, CarType carType): base(id)
+    private Car(Guid id, string registrationNumber): base(id)
     {
         RegistrationNumber = registrationNumber;
-        CarType = carType;
     }
 
     public static Car Create(string registrationNumber, CarType carType)
@@ -21,13 +20,16 @@ public class Car: Entity
         Guard.Against.InvalidRegistrationNumber(registrationNumber);
         Guard.Against.Null(carType, nameof(carType));
 
-        return new Car(Guid.NewGuid(), registrationNumber, carType);
+        return new Car(Guid.NewGuid(), registrationNumber)
+        {
+             CarType = carType
+        };
     }
 
     public void ChangeCarType(CarType carType)
     {
         Guard.Against.Null(carType, nameof(carType));
-
+    
         CarType = carType;
     }
 
@@ -43,12 +45,12 @@ public class Car: Entity
     {
         ChangeStatus(CarStatus.Available);
     }
-
+    
     public void Unavailable()
     {
         ChangeStatus(CarStatus.Unavailable);
     }
-
+    
     private void ChangeStatus(CarStatus status)
     {
         if (!status.Equals(Status))

@@ -49,8 +49,8 @@ public static class BookingGuards
     public static void ChangeTerminatedBooking(this IGuardClause guardClause, Booking booking)
     {
         guardClause.Null(booking, nameof(booking));
-        if (BookingStatus.TerminalStates.Contains(booking.Status))
-            throw new BusinessException($"A {booking.Status.Name} booking cannot be modified.", 
+        if (BookingStatusExtensions.TerminalStates.Contains(booking.Status))
+            throw new BusinessException($"A {nameof(booking.Status)} booking cannot be modified.", 
                 "CANNOT_CHANGE_TERMINATED_BOOKING");
     }
 
@@ -58,8 +58,8 @@ public static class BookingGuards
     {
         guardClause.Null(currentStatus, nameof(currentStatus));
         guardClause.Null(newStatus, nameof(newStatus));
-        if (BookingStatus.TerminalStates.Contains(currentStatus) && BookingStatus.ActiveStates.Contains(newStatus))
-            throw new BusinessException($"The booking status cannot be changed from {currentStatus.Name} to {newStatus.Name}.", 
+        if (BookingStatusExtensions.TerminalStates.Contains(currentStatus) && BookingStatusExtensions.ActiveStates.Contains(newStatus))
+            throw new BusinessException($"The booking status cannot be changed from {nameof(currentStatus)} to {nameof(newStatus)}.", 
                 "INVALID_BOOKING_STATUS_CHANGE");
     }
     public static void ContactCollisions(this IGuardClause guardClause, Booking booking, IReadOnlyList<Booking> existingBookings)
@@ -122,7 +122,7 @@ public static class BookingGuards
 
     private static string? HasContactCollision(Booking booking, DateTimeRange timeRange, IReadOnlyList<Booking> collisionCandidates)
     {
-        if (!HasCollision(collisionCandidates, x => x.Contact.Equals(booking.Contact) && x.TimeRange.Overlaps(timeRange) && !x.Equals(booking) && BookingStatus.ActiveStates.Contains(x.Status)))
+        if (!HasCollision(collisionCandidates, x => x.Contact.Equals(booking.Contact) && x.TimeRange.Overlaps(timeRange) && !x.Equals(booking) && BookingStatusExtensions.ActiveStates.Contains(x.Status)))
             return null;
 
         return $"The contact {booking.Contact.FullName} with license #{booking.Contact.LicenseNumber} already has a booking between {timeRange.Start:HH:mm} to {timeRange.End:HH:mm}.";
@@ -130,7 +130,7 @@ public static class BookingGuards
 
     private static string? HasCarCollision(Booking booking, DateTimeRange timeRange, IReadOnlyList<Booking>? collisionCandidates)
     {
-        if (!HasCollision(collisionCandidates, x => x.Car.Equals(booking.Car) && x.TimeRange.Overlaps(timeRange) && !x.Equals(booking) && BookingStatus.ActiveStates.Contains(x.Status)))
+        if (!HasCollision(collisionCandidates, x => x.Car.Equals(booking.Car) && x.TimeRange.Overlaps(timeRange) && !x.Equals(booking) && BookingStatusExtensions.ActiveStates.Contains(x.Status)))
             return null;
 
         return $"The car with license plate #{booking.Car.RegistrationNumber} is already reserved between {timeRange.Start:HH:mm} to {timeRange.End:HH:mm}.";

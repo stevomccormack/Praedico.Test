@@ -10,7 +10,7 @@ public static class BookingRequestMap
     public static Booking ToDomain(this CreateBookingRequest request)
     {
         var contact = Contact.Create(request.ContactLicenseNumber, request.ContactGivenName, request.ContactSurname);
-        var carType = CarType.FromName(request.CarType);
+        var carType = request.CarType;
         var car = Car.Create(request.CarRegistrationNumber, carType);
         return Booking.Create(contact, car, request.PickupDateTime, request.ReturnDateTime);
     }

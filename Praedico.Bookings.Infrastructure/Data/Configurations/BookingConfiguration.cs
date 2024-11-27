@@ -19,12 +19,7 @@ internal class BookingConfiguration : IEntityTypeConfiguration<Booking>
         builder.Property(x => x.PickupDateTime).HasColumnName("PickupDateTimeUtc").IsRequired();
         builder.Property(x => x.ReturnDateTime).HasColumnName("ReturnDateTimeUtc").IsRequired();        
         builder.Property(x => x.CreatedOn).HasColumnName("CreatedOnUtc").IsRequired().HasDefaultValueSql("GETUTCDATE()");
-
-        builder.OwnsOne(x => x.Status,
-            x =>
-            {
-                x.Property(p => p.Name).HasColumnName("Status").HasMaxLength(20).IsRequired();
-            }).Navigation(p => p.Status).IsRequired();
+        builder.Property(x => x.Status).HasConversion<string>().HasMaxLength(20).IsRequired().HasDefaultValue(BookingStatus.Placed);
         
         builder.HasOne(x => x.Contact)
             .WithMany() // No navigation from Contact back to Booking.

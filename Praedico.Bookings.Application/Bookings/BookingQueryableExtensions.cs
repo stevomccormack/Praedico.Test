@@ -1,4 +1,5 @@
 ﻿using Praedico.Bookings.Domain;
+using Praedico.Bookings.Domain.Cars;
 using Praedico.Bookings.Domain.Schedules;
 
 namespace Praedico.Bookings.Application.Bookings;
@@ -25,7 +26,7 @@ public static class BookingQueryableExtensions
     public static IQueryable<Booking> AvailableCars(this IQueryable<Booking> query,
         DateTime pickupDateTime,
         DateTime returnDateTime,
-        string[]? carTypes)
+        CarType[]? carTypes)
     {
         query = query.Where(x => x.Car.IsActive);
         query = query.ByCarTypes(carTypes);
@@ -33,8 +34,8 @@ public static class BookingQueryableExtensions
         return query;
     }
 
-    public static IQueryable<Booking> ByCarTypes(this IQueryable<Booking> query, string[]? carTypes) =>
-        carTypes?.Length > 0 ? query.Where(x => carTypes.Contains(x.Car.CarType.Name)) : query;  //DOESTNT WORK WITH VALUECONVERTER! NEED VALUE OBJECT!
+    public static IQueryable<Booking> ByCarTypes(this IQueryable<Booking> query, CarType[]? carTypes) =>
+        carTypes?.Length > 0 ? query.Where(x => carTypes.Contains(x.Car.CarType)) : query;  //DOESTNT WORK WITH VALUECONVERTER! NEED VALUE OBJECT!
         //carTypes?.Length > 0 ? query.Where(x => carTypes.Any(ct => ct == x.Car.CarType.Name)) : query;
         //carTypes?.Length > 0 ? query.AsEnumerable().Where(x => carTypes.Contains(x.Car.CarType.Name)).AsQueryable() : query;    
 

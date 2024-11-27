@@ -7,7 +7,7 @@ public static class CarRequestMap
 {
     public static Car ToDomain(this CreateCarRequest request)
     {
-        var carType = CarType.FromName(request.CarType);
+        var carType = request.CarType;
         var car = Car.Create(request.CarRegistrationNumber, carType);
         
         return car;

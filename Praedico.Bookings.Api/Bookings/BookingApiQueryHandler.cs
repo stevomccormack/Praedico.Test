@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Praedico.Bookings.Application.Bookings;
+﻿using Praedico.Bookings.Application.Bookings;
 using Praedico.Bookings.Api.Cars;
+using Praedico.Bookings.Domain.Cars;
+
 //Mediator - typically use for CQRS handling
 
 namespace Praedico.Bookings.Api.Bookings;
@@ -12,7 +13,7 @@ public class BookingApiQueryHandler(BookingQueryHandler bookingQueryHandler)
     public async Task<IResult> GetAllBookings(CancellationToken cancellationToken = default)
     {
         var bookings = await BookingQueryHandler.GetAllBookings(cancellationToken: cancellationToken);
-        var result = bookings.ToResponse();
+        var result = bookings.ToListResponse();
         return Results.Ok(result);
     }
 
@@ -26,14 +27,18 @@ public class BookingApiQueryHandler(BookingQueryHandler bookingQueryHandler)
     
     public async Task<IResult> CheckCarTypeAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
     {
-        var availableCarTypes = await BookingQueryHandler.CheckCarTypeAvailability(pickupDateTime, returnDateTime, carTypes,cancellationToken);
-        return Results.Ok(availableCarTypes);
+        var availableCarTypes = await BookingQueryHandler.CheckCarTypeAvailability(pickupDateTime, returnDateTime, carTypes.ToCarTypeArray(),cancellationToken);
+        var result = availableCarTypes.Select(x => new
+        {
+            CarType = x.ToString(),
+        });
+        return Results.Ok(result);
     }
     
     public async Task<IResult> CheckCarAvailability(DateTime pickupDateTime, DateTime returnDateTime, string[]? carTypes, CancellationToken cancellationToken = default)
     {
-        var availableCars = await BookingQueryHandler.CheckCarAvailability(pickupDateTime, returnDateTime, carTypes,cancellationToken);
-        var result = availableCars.ToResponse();
-        return Results.Ok(availableCars);
+        var availableCars = await BookingQueryHandler.CheckCarAvailability(pickupDateTime, returnDateTime, carTypes.ToCarTypeArray(),cancellationToken);
+        var result = availableCars.ToListResponse();
+        return Results.Ok(result);
     }
 }
